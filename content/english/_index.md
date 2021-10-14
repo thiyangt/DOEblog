@@ -21,7 +21,7 @@ banner:
     link: project
   content: Department of Statistics, Faculty of Applied Sciences, University of Sri Jayewardenepura, Sri Lanka
   enable: true
-  title: A Digital Marketing <br/> & Design Agency
+  title: Design of Experiments <br/> & Dr Thiyanga S. Talagala
 cta:
   bg_image: images/call-to-action-bg.jpg
   button:
@@ -39,18 +39,18 @@ funfacts:
     in Bookmarksgrove right at the coast of the Semantics'''
   enable: true
   funfact_item:
-  - count: "99"
+  - count: "100hrs"
     icon: fas fa-mug-hot
-    name: Cups Of Coffee
-  - count: "45"
+    name: Workload
+  - count: "3"
     icon: fas fa-glasses
-    name: Article Written
-  - count: "125"
+    name: Assignments
+  - count: "13"
     icon: fas fa-keyboard
-    name: Projects Completed
-  - count: "200"
+    name: Number of Lectures
+  - count: "160"
     icon: fas fa-clock
-    name: Combined Projects
+    name: Number of Students
   testimonial_slider:
   - content: This Company created an e-commerce site with the tools to make our business
       a success, with innovative ideas we feel that our site has unique elements that
