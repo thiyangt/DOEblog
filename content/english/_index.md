@@ -17,16 +17,15 @@ banner:
   bg_overlay: true
   button:
     enable: true
-    label: Discover Our Project
+    label: Download Course Outline
     link: project
-  content: We love the Web and the work we do.We work closely with our clients to
-    deliver  the best possible solutions for their needs
+  content: Department of Statistics, Faculty of Applied Sciences, University of Sri Jayewardenepura, Sri Lanka
   enable: true
   title: A Digital Marketing <br/> & Design Agency
 cta:
   bg_image: images/call-to-action-bg.jpg
   button:
-    enable: true
+    enable: false
     label: Tell Us Your Story
     link: contact
   content: Read more about what we do and our philosophy of design. Judge for yourself
@@ -86,8 +85,8 @@ portfolio:
     massa justo sit amet risus.\n\nMaecenas faucibus mollis interdum. Morbi leo risus,
     porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo,
     tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. "
-  enable: true
+  enable: false
   title: WE BELIEVE IN GREAT IDEAS
 service:
-  enable: true
+  enable: false
 ---
