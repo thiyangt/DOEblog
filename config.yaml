@@ -1,5 +1,5 @@
 baseURL: https://smart-doe.netlify.app/
-title: Design of Experiments | Dr Thiyanga S. Talagala
+title: Design of Experiments
 theme: airspace-hugo
 timeZone: UTC
 paginate: '6'

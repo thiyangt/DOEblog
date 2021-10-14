@@ -1,5 +1,5 @@
 ---
-about:
+about: 
   button:
     enable: true
     label: Download Course Outline
@@ -7,30 +7,11 @@ about:
   content: |-
     Department of Statistics, Faculty of Applied Sciences, University of Sri Jayewardenepura
   enable: true
-  funfacts:
-  - count: "349"
-    icon: fas fa-flask
-    name: Completed Projects
-  - count: "35000"
-    icon: fas fa-fire-alt
-    name: Lines Of Code
-  - count: "70"
-    icon: fas fa-glasses
-    name: Satisfied Customer
-  - count: "10"
-    icon: fas fa-trophy
-    name: Awards Winner
-  - count: "75"
-    icon: fas fa-glass-cheers
-    name: Satisfied Customer
-  - count: "20"
-    icon: fas fa-certificate
-    name: Awards Winner
   image: images/company/about.jpg
   title: STA 225 2.0 Design of Experiments
 bg_image: images/feature-bg.jpg
 cta:
-  enable: true
+  enable: false
 description: Dr Thiyanga S. Talagala
 draft: false
 features:
@@ -60,7 +41,7 @@ features:
       tempor incididunt ut
     icon: fas fa-star-of-life
     name: Branding
-  title: We are indepented Design & Development Agency
+  title: 
 layout: about
 mission_vision:
   enable: false
