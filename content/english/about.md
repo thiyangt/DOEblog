@@ -2,12 +2,10 @@
 about:
   button:
     enable: true
-    label: Download Company Profile
+    label: Download Course Outline
     link: '#'
   content: |-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius enim, accusantium repellat ex autem numquam iure officiis facere vitae itaque.
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam qui vel cupiditate exercitationem, ea fuga est velit nulla culpa modi quis iste tempora non, suscipit repellendus labore voluptatem dicta amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, neque!
+    Department of Statistics, Faculty of Applied Sciences, University of Sri Jayewardenepura
   enable: true
   funfacts:
   - count: "349"
@@ -29,14 +27,14 @@ about:
     icon: fas fa-certificate
     name: Awards Winner
   image: images/company/about.jpg
-  title: We strive to be the best and <br> make awesome work.
+  title: STA 225 2.0 Design of Experiments
 bg_image: images/feature-bg.jpg
 cta:
   enable: true
-description: this is meta description
+description: Dr Thiyanga S. Talagala
 draft: false
 features:
-  enable: true
+  enable: false
   feature_item:
   - content: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut
@@ -65,7 +63,7 @@ features:
   title: We are indepented Design & Development Agency
 layout: about
 mission_vision:
-  enable: true
+  enable: false
   tabs:
   - content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore nobis
       ducimus facere repellat harum, eius cupiditate, aliquam aut deserunt. Nemo illo
@@ -102,5 +100,5 @@ mission_vision:
     name: Approach
 testimonial:
   enable: true
-title: About Our Company
+title: Design and Analysis of Experiments
 ---
