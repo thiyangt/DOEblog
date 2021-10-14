@@ -21,7 +21,7 @@ banner:
     link: project
   content: Department of Statistics, Faculty of Applied Sciences, University of Sri Jayewardenepura, Sri Lanka
   enable: true
-  title: Design of Experiments <br/> & Dr Thiyanga S. Talagala
+  title: Design and Analysis of Experiments <br/>  Dr Thiyanga S. Talagala
 cta:
   bg_image: images/call-to-action-bg.jpg
   button:
