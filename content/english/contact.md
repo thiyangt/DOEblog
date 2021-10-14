@@ -1,7 +1,7 @@
 ---
 bg_image: images/feature-bg.jpg
-description: ttalagala@sjp.ac.lk
+description: this is meta description
 draft: false
-layout:
-title: Contact
+layout: contact
+title: Drop Us A Note
 ---

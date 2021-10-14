@@ -1,5 +1,5 @@
-baseURL: https://smartdoe.netlify.app/
-title: Design of Experiments | Creative Agency Hugo Template
+baseURL: https://demo.gethugothemes.com/airspace/
+title: Airspace | Creative Agency Hugo Template
 theme: airspace-hugo
 timeZone: UTC
 paginate: '6'
