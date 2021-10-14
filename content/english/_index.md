@@ -17,16 +17,15 @@ banner:
   bg_overlay: true
   button:
     enable: true
-    label: Discover Our Project
+    label: Download Course Outline
     link: project
-  content: We love the Web and the work we do.We work closely with our clients to
-    deliver  the best possible solutions for their needs
+  content: Department of Statistics, Faculty of Applied Sciences, University of Sri Jayewardenepura, Sri Lanka
   enable: true
-  title: A Digital Marketing <br/> & Design Agency
+  title: Design and Analysis of Experiments <br/>  Dr Thiyanga S. Talagala
 cta:
   bg_image: images/call-to-action-bg.jpg
   button:
-    enable: true
+    enable: false
     label: Tell Us Your Story
     link: contact
   content: Read more about what we do and our philosophy of design. Judge for yourself
@@ -40,18 +39,18 @@ funfacts:
     in Bookmarksgrove right at the coast of the Semantics'''
   enable: true
   funfact_item:
-  - count: "99"
+  - count: "100hrs"
     icon: fas fa-mug-hot
-    name: Cups Of Coffee
-  - count: "45"
+    name: Workload
+  - count: "3"
     icon: fas fa-glasses
-    name: Article Written
-  - count: "125"
+    name: Assignments
+  - count: "13"
     icon: fas fa-keyboard
-    name: Projects Completed
-  - count: "200"
+    name: Number of Lectures
+  - count: "160"
     icon: fas fa-clock
-    name: Combined Projects
+    name: Number of Students
   testimonial_slider:
   - content: This Company created an e-commerce site with the tools to make our business
       a success, with innovative ideas we feel that our site has unique elements that
@@ -86,8 +85,8 @@ portfolio:
     massa justo sit amet risus.\n\nMaecenas faucibus mollis interdum. Morbi leo risus,
     porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo,
     tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. "
-  enable: true
+  enable: false
   title: WE BELIEVE IN GREAT IDEAS
 service:
-  enable: true
+  enable: false
 ---
