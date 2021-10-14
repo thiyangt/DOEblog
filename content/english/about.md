@@ -5,9 +5,7 @@ about:
     label: Download Company Profile
     link: '#'
   content: |-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius enim, accusantium repellat ex autem numquam iure officiis facere vitae itaque.
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam qui vel cupiditate exercitationem, ea fuga est velit nulla culpa modi quis iste tempora non, suscipit repellendus labore voluptatem dicta amet? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, neque!
+    Design of Experiments
   enable: true
   funfacts:
   - count: "349"
@@ -33,7 +31,7 @@ about:
 bg_image: images/feature-bg.jpg
 cta:
   enable: true
-description: this is meta description
+description: Dr Thiyanga S. Talagala
 draft: false
 features:
   enable: true
@@ -102,5 +100,5 @@ mission_vision:
     name: Approach
 testimonial:
   enable: true
-title: About Our Company
+title: Design of Experiments
 ---
