@@ -1,5 +1,5 @@
-baseURL:
-title: Airspace | Creative Agency Hugo Template
+baseURL: https://smart-doe.netlify.app/
+title: Design of Experiments
 theme: airspace-hugo
 timeZone: UTC
 paginate: '6'
