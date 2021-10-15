@@ -103,7 +103,7 @@ https://smart-doe.netlify.app/
 
 
 ```{r, echo=FALSE}
-knitr::include_url("https://hellor.netlify.app/courseoutline/STA326_2_Programming_and_Data_Analysis_with_R.pdf")
+knitr::include_url("https://smart-doe.netlify.app/DOE_ILO_PLO.pdf")
 ```
 
 ---
