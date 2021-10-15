@@ -60,6 +60,156 @@ style_duo_accent(
 options(htmltools.dir.version = FALSE)
 ```
 
+## Lecturer-in-charge and Chief Examiner
+
+- Dr Thiyanga S. Talagala
+
+- PhD in Statistics (2019), Monash University, Australia
+
+- BSc (Hons, Special) Statistics, University of Sri Jayewardenepura
+
+- Batch first and Professor R A Dayananda Gold Medalist
+
+- Research interests
+
+  - Data visualization, Computer vision, Time series forecasting, Machine learning and interpretability methods, Statistical computing
+
+- Personal website: https://thiyanga.netlify.app/
+
+---
+
+## Personal website
+
+```{r, echo=FALSE}
+knitr::include_url("https://thiyanga.netlify.app/")
+```
+
+https://thiyanga.netlify.app/
+
+---
+
+## Course website
+
+```{r, echo=FALSE}
+knitr::include_url("https://smart-doe.netlify.app/")
+```
+
+https://smart-doe.netlify.app/
+
+
+---
+
+## Course outline
+
+
+```{r, echo=FALSE}
+knitr::include_url("https://hellor.netlify.app/courseoutline/STA326_2_Programming_and_Data_Analysis_with_R.pdf")
+```
+
+---
+
+## Makeup Quiz
+
+Category A
+
+- An illness that requires the student to miss all of his or her classes for 2 days or more.
+
+Category B
+
+- A period of grief for loss of a family member or friend.
+
+Category C
+
+- A family emergency.
+
+---
+
+## Philosophy driving our makeup exam policy has three goals
+
+
+- Keep things fair.
+
+- Encourage good time-management.
+
+- Encouragement and appreciation of on time submission students.
+
+
+
+**A valid documentation of proof is required prior to the assignment deadline.**
+
+---
+
+## Help us to help you!
+
+.pull-left[
+![](week1/solo-houses_thumb.jpeg)
+]
+
+--
+
+.pull-right[
+
+- Use the LMS forum to ask questions.
+
+- Feel free to answer each others questions.
+
+- I will also provide answers.
+
+- Email ttalagala@sjp.ac.lk only for issues that are personal.
+
+- For details on consultation see course website.
+
+
+
+]
+
+
+---
+class: inverse, center, middle
+
+# Additional resources
+
+---
+
+## R Ladies 
+
+![](useR2019-Rladies.jpeg)
+
+---
+
+## R Ladies 
+
+```{r, echo=FALSE}
+knitr::include_url("https://rladies.org/")
+```
+
+---
+
+## R Ladies Colombo
+
+```{r, echo=FALSE}
+knitr::include_url("https://rladiescolombo.netlify.app/")
+```
+
+---
+
+## Other
+
+- Stack Overflow: question and answer website for professional and enthusiast programmers
+
+- Cousera
+
+- DataCamp
+
+- Udemy etc.
+
+---
+class: inverse, center, middle
+
+# Buckle up - Let's get started.
+
+
+---
 
 # Why Design and Analysis of Experiments ?
 
@@ -71,7 +221,9 @@ options(htmltools.dir.version = FALSE)
 
 **Example:**
 
-1. A corn field is divided into size, each part is **treated** with a different fertilizer to see which produces the most corn.
+1. A corn field is divided into 4 parts, each part is **treated** with a different fertilizer to see which produces the most corn.
+
+2. An experiment is conducted to study the influence of operating temperature and three types of face-plate glass in the light output of an oscilloscope tube.
 
 
 
@@ -312,13 +464,13 @@ class: middle, center
 
 # Your Turn
 
-- What is the experimental unit?
+What is the experimental unit?
 
-- What is the observational unit?
+What is the observational unit?
 
 ---
 
-## Question
+## Question 4
 
 20 rats are randomly assigned to each of 4 doses (none, low, medium, high). The rats are kepts in individual cages under the same environmental conditions in the same room. Each rat has its assigned dose stirred into its daily meal for 2 weeks. The weight of each rat is recorded after two weeks. 
 
@@ -333,7 +485,7 @@ countdown(minutes = 4L, seconds = 00)
 
 ---
 
-## Question
+## Question 5
 
 20 rats are randomly assigned to 4 cages (5 rats in each). Each cage is then randomly assigned to one dose (non, low, medium, high). The rats are kept in their assigned cages under the same onvironmental conditions in the same room. Rats are not fed individually; food is placed in each cage in a common plate out of which all rats eat. The weight of each rat is recorded after two weeks. 
 
@@ -358,6 +510,20 @@ variable**."
 Source: The Certified Six Sigma Black Belt Handbook by T. M. Kubiak and Donald W. Benbow
 
 ---
+class: middle, center
+
+# General Model for Process or System
+
+---
+background-image: url('process.png')
+background-position: center
+background-size: contain
+
+
+
+
+
+---
 
 ## General Model for Process or System
 
@@ -377,6 +543,7 @@ by scientist
 
 - Noise factors ( $\epsilon$ ): unmeasured, uncontrolled factors, often called experimental
 variability
+
 
 ---
 
