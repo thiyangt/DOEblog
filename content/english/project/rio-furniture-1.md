@@ -11,6 +11,6 @@ title: Week 1
 
 # Introduction to Design and Analysis of Experiments
 
-Course outline: [click here](DOE_ILO_PLO.pdf)
+Course outline: [click here](/DOE_ILO_PLO.pdf)
 
 Slides: [click here](/slides/L1_DOE.html)
