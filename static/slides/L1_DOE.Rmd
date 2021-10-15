@@ -142,7 +142,7 @@ Category C
 ## Help us to help you!
 
 .pull-left[
-![](week1/solo-houses_thumb.jpeg)
+![](solo.jpeg)
 ]
 
 --
