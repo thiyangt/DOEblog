@@ -7,3 +7,6 @@ image: images/portfolio/work2.jpg
 title: Week 2
 ---
 
+## Basic principles of experimental design
+
+Slides: [click here](/slides/L2_DOE.html)
