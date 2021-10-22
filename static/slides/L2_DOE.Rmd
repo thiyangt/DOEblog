@@ -212,7 +212,7 @@ countdown(minutes = 2L, seconds = 00)
 
 - helps to average out the effects of extraneous factors that may be present.
 
-- assign treatments to experimental units so that each unit has an equal chance of being asigned a particular treatment, thus minimizing the effect of variation from uncontrolled noise factors.
+
 
 ---
 
@@ -233,37 +233,30 @@ Potential sources of variation: Fertilizer, soil, sun, water, humidity, etc.
 
 ## How should we assign treatments to the plots?
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  overflow:hidden;padding:50px 50px;word-break:normal;}
-.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-  font-weight:normal;overflow:hidden;padding:50px 50px;word-break:normal;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
-<table class="tg">
-<thead>
-  <tr>
-    <th class="tg-0pky"></th>
-    <th class="tg-0pky"></th>
-    <th class="tg-0pky"></th>
-    <th class="tg-0pky"></th>
-    <th class="tg-0pky"></th>
-    <th class="tg-0pky"></th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-    <td class="tg-0pky"></td>
-  </tr>
-</tbody>
-</table>
+![](crd1)
 
+Experimental units will be randomly assigned to treatments by using lottery method.
+
+
+---
+background-image: url('crd1.png')
+background-position: center
+background-size: contain
+
+---
+background-image: url('crd2.png')
+background-position: center
+background-size: contain
+
+---
+background-image: url('crd3.png')
+background-position: center
+background-size: contain
+
+---
+background-image: url('crd4.png')
+background-position: center
+background-size: contain
 
 ---
 
@@ -273,6 +266,29 @@ Potential sources of variation: Fertilizer, soil, sun, water, humidity, etc.
 
 - A nuisance factor has some effect on the response, but it is of no interest to the experimenter. However, the variability it transmits to the response needs to be minimized.
 
+- Randomization within blocks of homogeneous experimental units (Blocks are usually homogeneous and treatments will be randomly assigned within each block).
+
+- Every block contains each of the treatment.
+
+- Variability between blocks can be large, variability within a block should be relatively small.
+
+---
+
+background-image: url('rcbd1.png')
+background-position: center
+background-size: contain
+
+Blocking
+
+---
+
+background-image: url('rcbd2.png')
+background-position: bottom
+background-size: contain
+
+Blocking
+
+
 ---
 
 background-image: url('tea.jpeg')
@@ -280,5 +296,110 @@ background-position: center
 background-size: cover
 
 ## Example: Blocking
+
+---
+
+## Example: Blocking
+
+Hypothesis: Tea varieties (A versus B) affects tea yield.
+
+Experimental units: three plots of land, each to be divided into a $2 \times 2$ grid.
+
+Outcome: Tea yield.
+
+Factor of interest: Tea varieties, A or B.
+
+Nuisance factor : Soil quality.
+
+---
+
+# Design types
+
+- Complete Randomized Design (CRD)
+
+- Randomized Complete Block Design (RCBD)
+
+- Latin Square Design
+
+- Factorial Designs
+
+---
+class: center, middle, inverse
+
+# **Complete Randomized Design (CRD)**
+
+---
+
+## Complete Randomized Design (CRD)
+
+- The most basic type of statistical design
+
+- Particularly useful when the experimental units are homogeneous
+
+- Every experimental unit has an equal chance to receive any one of the treatments
+
+
+---
+
+
+## Example 1
+
+Question: How the 4 diets (A, B, C, and D) affect the coagulation of rabbits? 
+
+Treatment: Diet
+
+Factor levels: A, B, C, D
+
+Response: Time in seconds that it takes for a cut to stop bleeding (coagulation rate).
+
+Experimental unit: 16 rabits
+
+Replicates: 4
+
+
+There are 16 rabbits (same age, weight, height) 
+
+---
+background-image: url('bunnies.jpeg')
+background-position: center
+background-size: cover
+
+## Your turn
+
+<span style="color: white;">How should we use randomization to assign rabbits to four treatment group?</span>
+
+
+
+
+```{r, echo=FALSE}
+library(countdown)
+countdown(minutes = 5L, seconds = 00)
+```
+
+
+---
+
+## In-class 
+
+---
+background-image: url('packagefood.jpeg')
+background-position: center
+background-size: cover
+
+# Example 2
+
+
+
+
+---
+
+# Example 2
+
+A food company wished to test four different package designs for a new breakfast cereal. Ten stores, with approximately equal sales volumes, were selected as the experimental units. Each store was randomly assigned one of the package designs, with two of the package designs assigned to 3 stores each and other two designs to two stors each. Other relevant conditions besides package design, price, amount and location of shelf space and special promotional efforts were kept the same for all stores in the experiment. Sales, in number of cases, were observed for the study period. 
+
+---
+background-image: url('sales.png')
+background-position: center
+background-size: cover
 
 
