@@ -487,7 +487,7 @@ countdown(minutes = 4L, seconds = 00)
 
 ## Question 5
 
-20 rats are randomly assigned to 4 cages (5 rats in each). Each cage is then randomly assigned to one dose (non, low, medium, high). The rats are kept in their assigned cages under the same onvironmental conditions in the same room. Rats are not fed individually; food is placed in each cage in a common plate out of which all rats eat. The weight of each rat is recorded after two weeks. 
+20 rats are randomly assigned to 4 cages (5 rats in each). Each cage is then randomly assigned to one dose (non, low, medium, high). The rats are kept in their assigned cages under the same environmental conditions in the same room. Rats are not fed individually; food is placed in each cage in a common plate out of which all rats eat. The weight of each rat is recorded after two weeks. 
 
 - What is the experimental unit?
 
