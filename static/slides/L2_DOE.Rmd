@@ -120,11 +120,11 @@ Two aspects of any experimental problem
 
 ## Replication
 
-Repetition of the same experiment
+In experimental design, replication is where each treatment is assigned to many participants. 
 
 ## Replicate
 
-Each repition of the experiment is called **replication**.
+Each repetition of the experiment is called **replicate**
 
 Example:
 
@@ -170,7 +170,7 @@ $\bar{y}_A$ vs $\bar{y}_b$
 **Distrinction between Replication and Repeated measurements**
 
 
-Replication: entire experiment is performed more than once for a given set of independent variables. 
+Replication:  multiple experimental runs with the same factor settings.
 
 Repeated measurements: multiple measurements from the same experimental unit
 
