@@ -2,7 +2,7 @@
 title: "STA 225 2.0 Design and Analysis of Experiments"
 subtitle: "Lecture 2"
 author: "Dr Thiyanga S. Talagala"
-date: "`r Sys.Date()`"
+date: "2021-10-22"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -170,7 +170,7 @@ $\bar{y}_A$ vs $\bar{y}_b$
 **Distrinction between Replication and Repeated measurements**
 
 
-Replication:  multiple experimental runs with the same factor settings.
+Replication:repetition of the basic experiment  (multiple experimental runs with the same factor settings).
 
 Repeated measurements: multiple measurements from the same experimental unit
 
