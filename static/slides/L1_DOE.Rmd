@@ -641,9 +641,9 @@ factors on some population characteristics.
     comparison of different fertilizers, different drugs, different varieties of a crop etc.
 
 ---
-## Types and Sources of Experimental Errors
+## Types and Sources of Errors
 
-1. Random errors
+1. Random errors (Experimental error)
 
 2. Systematic errors
 
