@@ -103,17 +103,17 @@ options(htmltools.dir.version = FALSE)
 
 ---
 
-Step 1: Assign treatments at random
+## Step 1: Assign treatments at random
 
 
 
 ---
 
-Step 2: Measure the response variable
+## Step 2: Measure the response variable
 
 
 ---
-Step 3: Organize data
+## Step 3: Organize data
 
 ```{r, comment=NA, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
@@ -130,17 +130,54 @@ df %>% knitr::kable(format = "html", table.attr = "style='width:50%;'",  align =
 
 ---
 
-Step 4: Exploratory data analysis
+
+## Step 4: Exploratory data analysis
 
 .pull-left[
 
-```{r, comment=NA, eval=F}
-df <- df %>% pivot_longer()
+```{r, comment=NA, echo=FALSE}
+df <- df %>% pivot_longer(1:5, "Treatment", "value")
+ggplot(df, aes(x = factor(1), y = value)) +
+  geom_boxplot(width = 0.4, fill = "white") +
+  geom_point(aes(color = Treatment)) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"))  
 ```
 
 ]
 
+--
+
 .pull-right[
+
+```{r, comment=NA, echo=FALSE}
+ggplot(df, aes(x = factor(1), y = value)) +
+  geom_boxplot(width = 0.4, fill = "white") +
+  geom_jitter(aes(color = Treatment), width = 0.2, height = 0.00) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"))  
+```
+
+]
+
+
+
+
+---
+
+## Step 4: Exploratory data analysis
+
+.pull-left[
+
+```{r, comment=NA, echo=FALSE}
+#df <- df %>% pivot_longer(1:5, "Treatment", "Value")
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) +  geom_point() + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+```
+
+]
+
+
+.pull-right[
+
+```{r, comment=NA, echo=FALSE}
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+```
 
 
 ]
@@ -184,13 +221,14 @@ $$\textbf{Variability}_\text{total} = \textbf{Variability}_\text{treatment} + \t
 ---
 
 
-| Treatment <br> (level) 	|  R1 	|  R2	| R3| R4	| R5 	| Totals 	|  Averages	|
+| Treatment (level) 	|  R1 	|  R2	| R3| R4	| R5 	| Totals 	|  Averages  	|
 |:---:	| :-----:	| :---:	| :---:	| :---:	| :---:	| :---:	|
-|  A	| $y_{11}$ <br> 8 	| $y_{12}$ <br> 8	| $y_{13}$ <br> 15 | $y_{14}$ <br> 11	| $y_{15}$ <br> 7	|  $y_{1.}$ <br>	| $\bar{y}_{1.}$ <br> 	|
-|  B	| $y_{21}$ <br> 11 	| $y_{22}$ <br> 17	| $y_{23}$ <br> 13 | $y_{24}$ <br> 18	| $y_{25}$ <br> 17	|  $y_{2.}$ <br>	| $\bar{y}_{2.}$ <br> 	|
-|  C	| $y_{31}$ <br> 14 	| $y_{32}$ <br> 16	| $y_{33}$ <br> 18 | $y_{34}$ <br> 20	| $y_{35}$ <br> 20	|  $y_{3.}$ <br>	| $\bar{y}_{3.}$ <br> 	|
-|  D	| $y_{41}$ <br> 20 	| $y_{42}$ <br> 24	| $y_{43}$ <br> 22 | $y_{44}$ <br> 19	| $y_{45}$ <br> 23	|  $y_{4.}$ <br>	| $\bar{y}_{4.}$ <br> 	|
-|  E	| $y_{51}$ <br> 8 	| $y_{52}$ <br> 10	| $y_{53}$ <br> 12 | $y_{54}$ <br> 15	| $y_{55}$ <br> 12	|  $y_{5.}$ <br>	| $\bar{y}_{5.}$ <br> 	|
+|  A	| $y_{11}$ <br> 8 	| $y_{12}$ <br> 8	| $y_{13}$ <br> 15 | $y_{14}$ <br> 11	| $y_{15}$ <br> 7	|  $y_{1.}$  <br> 49	| $\bar{y}_{1.}$ <br> 9.8	|
+|  B	| $y_{21}$ <br> 11 	| $y_{22}$ <br> 17	| $y_{23}$ <br> 13 | $y_{24}$ <br> 18	| $y_{25}$ <br> 17	|  $y_{2.}$ <br>	76| $\bar{y}_{2.}$ <br> 15.2 	|
+|  C	| $y_{31}$ <br> 14 	| $y_{32}$ <br> 16	| $y_{33}$ <br> 18 | $y_{34}$ <br> 20	| $y_{35}$ <br> 20	|  $y_{3.}$ <br>	88| $\bar{y}_{3.}$ <br> 17.6 	|
+|  D	| $y_{41}$ <br> 20 	| $y_{42}$ <br> 24	| $y_{43}$ <br> 22 | $y_{44}$ <br> 19	| $y_{45}$ <br> 23	|  $y_{4.}$ <br> 108	| $\bar{y}_{4.}$ <br> 	21.6|
+|  E	| $y_{51}$ <br> 8 	| $y_{52}$ <br> 10	| $y_{53}$ <br> 12 | $y_{54}$ <br> 15	| $y_{55}$ <br> 12	|  $y_{5.}$ <br>	57| $\bar{y}_{5.}$ <br> 11.4 	|
+|  	|  	| 	| | 	| 	|  $y_{..} = 378$| $\frac{378}{25} = \frac{75.6}{5} = 15.12$ 	|
 
 
 ---

@@ -92,17 +92,17 @@ class: center, middle, inverse, title-slide
 
 ---
 
-Step 1: Assign treatments at random
+## Step 1: Assign treatments at random
 
 
 
 ---
 
-Step 2: Measure the response variable
+## Step 2: Measure the response variable
 
 
 ---
-Step 3: Organize data
+## Step 3: Organize data
 
 &lt;table style="width:50%; margin-left: auto; margin-right: auto;" class="table"&gt;
  &lt;thead&gt;
@@ -155,18 +155,40 @@ Step 3: Organize data
 
 ---
 
-Step 4: Exploratory data analysis
+
+## Step 4: Exploratory data analysis
 
 .pull-left[
 
-
-```r
-df &lt;- df %&gt;% pivot_longer()
-```
+![](L3_DOE_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
 
 ]
 
+--
+
 .pull-right[
+
+![](L3_DOE_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+]
+
+
+
+
+---
+
+## Step 4: Exploratory data analysis
+
+.pull-left[
+
+![](L3_DOE_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+]
+
+
+.pull-right[
+
+![](L3_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 
 ]
@@ -210,13 +232,14 @@ div.blue pre.r { background-color:red; }
 ---
 
 
-| Treatment &lt;br&gt; (level) 	|  R1 	|  R2	| R3| R4	| R5 	| Totals 	|  Averages	|
+| Treatment (level) 	|  R1 	|  R2	| R3| R4	| R5 	| Totals 	|  Averages  	|
 |:---:	| :-----:	| :---:	| :---:	| :---:	| :---:	| :---:	|
-|  A	| `\(y_{11}\)` &lt;br&gt; 8 	| `\(y_{12}\)` &lt;br&gt; 8	| `\(y_{13}\)` &lt;br&gt; 15 | `\(y_{14}\)` &lt;br&gt; 11	| `\(y_{15}\)` &lt;br&gt; 7	|  `\(y_{1.}\)` &lt;br&gt;	| `\(\bar{y}_{1.}\)` &lt;br&gt; 	|
-|  B	| `\(y_{21}\)` &lt;br&gt; 11 	| `\(y_{22}\)` &lt;br&gt; 17	| `\(y_{23}\)` &lt;br&gt; 13 | `\(y_{24}\)` &lt;br&gt; 18	| `\(y_{25}\)` &lt;br&gt; 17	|  `\(y_{2.}\)` &lt;br&gt;	| `\(\bar{y}_{2.}\)` &lt;br&gt; 	|
-|  C	| `\(y_{31}\)` &lt;br&gt; 14 	| `\(y_{32}\)` &lt;br&gt; 16	| `\(y_{33}\)` &lt;br&gt; 18 | `\(y_{34}\)` &lt;br&gt; 20	| `\(y_{35}\)` &lt;br&gt; 20	|  `\(y_{3.}\)` &lt;br&gt;	| `\(\bar{y}_{3.}\)` &lt;br&gt; 	|
-|  D	| `\(y_{41}\)` &lt;br&gt; 20 	| `\(y_{42}\)` &lt;br&gt; 24	| `\(y_{43}\)` &lt;br&gt; 22 | `\(y_{44}\)` &lt;br&gt; 19	| `\(y_{45}\)` &lt;br&gt; 23	|  `\(y_{4.}\)` &lt;br&gt;	| `\(\bar{y}_{4.}\)` &lt;br&gt; 	|
-|  E	| `\(y_{51}\)` &lt;br&gt; 8 	| `\(y_{52}\)` &lt;br&gt; 10	| `\(y_{53}\)` &lt;br&gt; 12 | `\(y_{54}\)` &lt;br&gt; 15	| `\(y_{55}\)` &lt;br&gt; 12	|  `\(y_{5.}\)` &lt;br&gt;	| `\(\bar{y}_{5.}\)` &lt;br&gt; 	|
+|  A	| `\(y_{11}\)` &lt;br&gt; 8 	| `\(y_{12}\)` &lt;br&gt; 8	| `\(y_{13}\)` &lt;br&gt; 15 | `\(y_{14}\)` &lt;br&gt; 11	| `\(y_{15}\)` &lt;br&gt; 7	|  `\(y_{1.}\)`  &lt;br&gt; 49	| `\(\bar{y}_{1.}\)` &lt;br&gt; 9.8	|
+|  B	| `\(y_{21}\)` &lt;br&gt; 11 	| `\(y_{22}\)` &lt;br&gt; 17	| `\(y_{23}\)` &lt;br&gt; 13 | `\(y_{24}\)` &lt;br&gt; 18	| `\(y_{25}\)` &lt;br&gt; 17	|  `\(y_{2.}\)` &lt;br&gt;	76| `\(\bar{y}_{2.}\)` &lt;br&gt; 15.2 	|
+|  C	| `\(y_{31}\)` &lt;br&gt; 14 	| `\(y_{32}\)` &lt;br&gt; 16	| `\(y_{33}\)` &lt;br&gt; 18 | `\(y_{34}\)` &lt;br&gt; 20	| `\(y_{35}\)` &lt;br&gt; 20	|  `\(y_{3.}\)` &lt;br&gt;	88| `\(\bar{y}_{3.}\)` &lt;br&gt; 17.6 	|
+|  D	| `\(y_{41}\)` &lt;br&gt; 20 	| `\(y_{42}\)` &lt;br&gt; 24	| `\(y_{43}\)` &lt;br&gt; 22 | `\(y_{44}\)` &lt;br&gt; 19	| `\(y_{45}\)` &lt;br&gt; 23	|  `\(y_{4.}\)` &lt;br&gt; 108	| `\(\bar{y}_{4.}\)` &lt;br&gt; 	21.6|
+|  E	| `\(y_{51}\)` &lt;br&gt; 8 	| `\(y_{52}\)` &lt;br&gt; 10	| `\(y_{53}\)` &lt;br&gt; 12 | `\(y_{54}\)` &lt;br&gt; 15	| `\(y_{55}\)` &lt;br&gt; 12	|  `\(y_{5.}\)` &lt;br&gt;	57| `\(\bar{y}_{5.}\)` &lt;br&gt; 11.4 	|
+|  	|  	| 	| | 	| 	|  `\(y_{..} = 378\)`| `\(\frac{378}{25} = \frac{75.6}{5} = 15.12\)` 	|
 
 
 ---
