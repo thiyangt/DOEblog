@@ -139,7 +139,7 @@ df %>% knitr::kable(format = "html", table.attr = "style='width:50%;'",  align =
 df <- df %>% pivot_longer(1:5, "Treatment", "value")
 ggplot(df, aes(x = factor(1), y = value)) +
   geom_boxplot(width = 0.4, fill = "white") +
-  geom_point(aes(color = Treatment)) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"))  
+  geom_point(aes(color = Treatment), size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"))  
 ```
 
 ]
@@ -151,7 +151,7 @@ ggplot(df, aes(x = factor(1), y = value)) +
 ```{r, comment=NA, echo=FALSE}
 ggplot(df, aes(x = factor(1), y = value)) +
   geom_boxplot(width = 0.4, fill = "white") +
-  geom_jitter(aes(color = Treatment), width = 0.2, height = 0.00) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"))  
+  geom_jitter(aes(color = Treatment), width = 0.2, height = 0.00, size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e"))  
 ```
 
 ]
@@ -167,7 +167,7 @@ ggplot(df, aes(x = factor(1), y = value)) +
 
 ```{r, comment=NA, echo=FALSE}
 #df <- df %>% pivot_longer(1:5, "Treatment", "Value")
-ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) +  geom_point() + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) +  geom_point(size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
 ```
 
 ]
@@ -176,7 +176,7 @@ ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) +  geom_point() + scal
 .pull-right[
 
 ```{r, comment=NA, echo=FALSE}
-ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(size=3, colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
 ```
 
 
@@ -209,7 +209,7 @@ df %>% group_by(Treatment) %>% summarise(
 .pull-right[
 
 ```{r, comment=NA, echo=FALSE}
-ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5, size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
 ```
 
 
@@ -497,7 +497,7 @@ $$H_1: \mu_i \neq \mu_j \text{ for at least one pair (i, j)}$$
 .pull-right[
 
 ```{r, comment=NA, echo=FALSE}
-ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5, size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
 ```
 
 
