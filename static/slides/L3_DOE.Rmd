@@ -184,6 +184,39 @@ ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fil
 
 ---
 
+.pull-left[
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+library(tidyverse)
+A <- c(8, 8, 15, 11, 7)
+B <- c(11, 17, 13, 18, 17)
+C <- c(14, 16, 18, 20, 20)
+D <- c(20, 24, 22, 19, 23)
+E <- c(8, 10, 12, 15, 12)
+df <- data.frame(A=A, B=B, C=C, D=D, E=E)
+df <- df %>% pivot_longer(1:5, "Treatment", "value")
+df$Treatment <- as.factor(df$Treatment)
+df %>% group_by(Treatment) %>% summarise(
+    mean=mean(value),
+    sd=sd(value),
+    median=median(value),
+    min=min(value),
+    max=max(value))
+```
+
+]
+
+.pull-right[
+
+```{r, comment=NA, echo=FALSE}
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+```
+
+
+]
+
+---
+
 ## Sources of Variation
 
 - Source of variation due to **treatments**
@@ -233,4 +266,249 @@ $$\textbf{Variability}_\text{total} = \textbf{Variability}_\text{treatment} + \t
 
 ---
 
+## Notations (cont.)
+
+$a$ - number of different treatments
+
+$y_{ij}$ - $j$th observation taken under factor level or treatment $i$
+
+$n$ - observations under the $i$th treatment
+
+$y_{i.}$ - total of the observations under the $i$th treatment
+
+$\bar{y}_{i.}$ - average of the observations under the $i$th treatment
+
+$y_{i.} = \sum_{j=1}^n y_{ij},$ 
+
+$\bar{y}_{i.} = \frac{y_{i.}}{n},$ $i = 1, 2, ..., a$
+
+
+---
+
+## Notations (cont.)
+
+$y_{..}$ - grand total of all the observations
+
+$\bar{y}_{..}$ - grand average of all the observations
+
+
+
+$y_{..} = \sum_{i=1}^a\sum_{j=1}^n y_{ij}$
+
+
+$\bar{y}_{..} = \frac{y_{..}}{N},$ where $N = an$
+
+
+
+Note: "dot" subscript notation implies summation over the subscript that it replaces.
+
+---
+class: inverse, center, middle
+
+#**one-way or single-factor analysis of variance**
+
+---
+
+## Model for the data
+
+We can describe the observations come from an experiment using a model. There are two ways to write the models
+
+**Method 1: means model**
+
+$$Y_{ij}= \mu_i + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., n           
+\end{cases}$$
+
+Where $Y_{ij}$ is the $ij$th observation, $\mu_i,$ is the mean of the $i$th factor level or treatment, and $\epsilon_{ij}$ is the **random error** component that includes other variabilities such as background noise, differences between experimental units, variability arising from uncontrolled factors, etc.
+
+We assume errors have mean zero, hence, $E(Y_{ij}) = \mu_{i}$.
+
+---
+
+**Method 2: Effects model (an alternative way to write the mean model)**
+
+$$\mu_i = \mu + \tau_i, \text{  } i=1, 2, ..., a$$
+
+Hence the following equation can be written as
+
+$$Y_{ij}= \mu_i + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., n           
+\end{cases}$$
+
+$$Y_{ij}= \mu + \tau_i + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., n           
+\end{cases}$$
+
+where $\mu$, is common to all treatment and we called it **overall mean**. The parameter $\tau_i$ is unique to the $i$th
+treatment called the $i$**th treatment effect.** 
+
+---
+
+## Model assumptions
+
+The model errors are assumed to be normally and independently distributed random variables with mean zero and variance $\sigma^2$. The variance $\sigma^2$ is assumed to be constant for all levels of the factor. 
+
+This implies that the observations
+
+$$y_{ij} \sim N(\mu+\tau_i, \sigma^2)$$
+
+and that the observations are mutually independent.
+
+---
+
+## In-class
+
+
+$$Y_{ij}= \mu + \tau_i + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., n           
+\end{cases}$$
+
+This is called the **random effects model** or **components of variance model**.
+
+---
+
+## Our goal
+
+- Test appropriate hypotheses about the treatment means
+
+- Estimate treatment means
+
+---
+
+## Hypotheses
+
+We want to test the equality of the $a$ treatment meann, that is, $E(Y_{ij}) = \mu + \tau_i = \mu_i, i=1, 2, ..., 1.$
+
+
+
+In terms of $\mu_i$
+
+$$H_0: \mu_1 = \mu_2=...=\mu_a$$
+$$H_1: \mu_i \neq \mu_j \text{ for at least one pair (i, j)}$$
+
+In terms of $\tau_i$
+
+$$H_0: \tau_1 = \tau_2=...=\tau_a=0$$
+$$H_1: \tau_i \neq 0 \text{ for at least one }i$$
+---
+
+### Analysis of Variance (ANOVA)
+
+
+$$\textbf{Variability}_\text{total} = \textbf{Variability}_\text{treatment} + \textbf{Variability}_\text{experimental error}$$
+
+
+ANOVA is derived from decomposing the total sum of squares (partitioning of total variability into its component). 
+
+The total sum of squares ( $SS_T$ )
+
+$$SS_T = \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2.$$
+
+$SS_T$ measures the overall variability in the data.
+
+Number of degrees of freedom = $an-1 = N-1$
+
+---
+
+## Decomposition of the Total Sum of Squares
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..} + \bar{y}_{i.} - \bar{y}_{i.})^2$$
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^n [(\bar{y}_{i.} - \bar{y}_{..} ) + (y_{ij} - \bar{y}_{i.})]^2$$
+
+$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$
+$\text{            }+ 2\sum_{i=1}^a\sum_{j=1}^n(\bar{y}_{i.} - \bar{y}_{..})(y_{ij}-\bar{y}_{i.})$
+
+The cross product term is zero. Hence,
+
+$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$
+
+
+---
+
+$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$
+
+$$SS_T = SS_{Treatments} + SS_{E}$$
+
+
+$SS_{Treatments}$ is called the sum of squares due to treatments (i.e., between treatments)
+
+$SS_{E}$ is called the sum of squares due to error (i.e., within treatments)
+
+---
+
+## ANOVA Table
+
+Source of variation |  Sum of squares (SS) | DF| Mean Square (MS) | F| p-value |
+---:---:---:---:---:---|
+Between treatments |  $SS_{Treatments}$ | $a-1$ | $MS_{Treatments}$ | $F_0=\frac{MS_{Treatments}}{MS_E}$ | $P(F \geq F_0)$|
+Error (within treatments) | $SS_E$ | $N-a$ | $MS_{E}$ | |
+Total |  $SS_T$ | $N-1$| | | |
+
+
+---
+
+$$SS_E = SS_T - SS_{Treatments}$$
+
+$$MS_{Treatments} = \frac{SS_{Treatments}}{a-1}$$
+
+$$MS_{E} = \frac{SS_{E}}{N-a}$$
+
+$$F_0 = \frac{MS_{Treatments}}{MS_E}$$
+
+If the null hypothesis of no difference in treatment means is true, the ratio
+
+$$F_0 = \frac{MS_{Treatments}}{MS_E}$$
+
+follows a $F$ distribution with $a-1$ and $N-a$ degrees of freedom.
+
+If $F_0 > F_{\alpha, a-1, N-a }$, we can conclude that there are differences in the treatment means.
+
+
+---
+
+.pull-left[
+
+```{r, comment=NA, message=FALSE, echo=FALSE}
+df$Treatment <- as.factor(df$Treatment)
+df %>% group_by(Treatment) %>% summarise(
+    mean=mean(value),
+    sd=sd(value),
+    median=median(value),
+    min=min(value),
+    max=max(value))
+```
+
+What is your guess? Reject $H_0$ or Do not reject $H_0$?
+
+$$H_0: \mu_1 = \mu_2=...=\mu_5$$
+$$H_1: \mu_i \neq \mu_j \text{ for at least one pair (i, j)}$$
+
+]
+
+.pull-right[
+
+```{r, comment=NA, echo=FALSE}
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) + geom_boxplot(aes(fill=Treatment), alpha=0.5) +   geom_point(colour="black", alpha=0.5) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) +  scale_fill_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) 
+```
+
+
+]
+
+---
+
+# ANOVA
+
+```{r, comment=NA}
+one.way <- aov(value~ Treatment, data = df)
+summary(one.way)
+```
 
