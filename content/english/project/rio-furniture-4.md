@@ -1,7 +1,7 @@
 ---
 bg_image: images/feature-bg.jpg
 category: DOE
-description: this is meta description
+description: Completely Randomized Experimental Design (ANOVA)
 draft: false
 image: images/portfolio/work4.jpg
 title: Week 4
