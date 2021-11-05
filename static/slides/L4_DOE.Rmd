@@ -1,0 +1,419 @@
+---
+title: "STA 225 2.0 Design and Analysis of Experiments"
+subtitle: "Lecture 4"
+author: "Dr Thiyanga S. Talagala"
+date: "2021-11-05"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - default
+      - default-fonts
+      - duke-blue
+      - hygge-duke
+      - libs/cc-fonts.css
+      - libs/figure-captions.css
+      - xaringan-themer.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#081d58",
+  secondary_color = "#FF961C",
+ inverse_header_color = "#FFFFFF",
+ title_slide_text_color = "#edf8b1",
+ link_color =  "#41b6c4"
+)
+#style_solarized_light(text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"))
+#style_mono_light(
+#  base_color = "#1c5253",
+#  header_font_google = google_font("Josefin Sans"),
+#  text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"),
+#  code_font_google   = google_font("Fira Mono")
+#)
+```
+
+<style>
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+</style>
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 30px;
+}
+</style>
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+
+### Analysis of Variance (ANOVA)
+
+
+$$\textbf{Variability}_\text{total} = \textbf{Variability}_\text{treatment} + \textbf{Variability}_\text{experimental error}$$
+
+
+ANOVA is derived from decomposing the total sum of squares (partitioning of total variability into its component). 
+
+The total sum of squares ( $SS_T$ )
+
+$$SS_T = \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2.$$
+
+$SS_T$ measures the overall variability in the data.
+
+Number of degrees of freedom = $an-1 = N-1$
+
+---
+
+**Decomposition of the Total Sum of Squares**
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..} + \bar{y}_{i.} - \bar{y}_{i.})^2$$
+
+$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^n [(\bar{y}_{i.} - \bar{y}_{..} ) + (y_{ij} - \bar{y}_{i.})]^2$
+
+$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$
+$\text{            }+ 2\sum_{i=1}^a\sum_{j=1}^n(\bar{y}_{i.} - \bar{y}_{..})(y_{ij}-\bar{y}_{i.})$
+
+The cross product term is zero. Hence,
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$$
+
+
+---
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$$
+
+$$SS_T = SS_{Treatments} + SS_{E}$$
+
+We see, the total variability in the data, measured by the total corrected sum of squares, can be partitioned into:
+
+- sum of squares of the differences <span style="color:red">between</span> the **treatment averages** and the **grand average** ( $SS_{Treatments}$ - the sum of squares due to treatments (i.e., between treatments))
+
+- sum of squares of the differences of observations <span style="color:red">within</span> treatments from the **treatment average** ( $SS_{E}$ is called the sum of squares due to error (i.e., within treatments))
+
+---
+
+
+$$SS_E = SS_T - SS_{Treatments}$$
+
+$$MS_{Treatments} = \frac{SS_{Treatments}}{a-1}$$
+
+$$MS_{E} = \frac{SS_{E}}{N-a}$$
+
+---
+
+
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$$
+
+$$SS_T = SS_{Treatments} + SS_{E}$$
+
+## Explore $SS_{E}$
+
+$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2 = \sum_{i=1}^a\left[\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2\right]$$
+
+--
+
+Let's consider the term in the square bracket and divide it by $n-1$
+
+$$S_i^2 = \frac{\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2}{n-1}, \text{ i = 1, 2, ..., a}$$
+
+---
+
+$$S_i^2 = \frac{\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2}{n-1}, \text{ i = 1, 2, ..., a}$$
+
+$S_i^2$ is the sample variance in the $i$th treatment.
+
+--
+
+We have $a$ number of treatments. Hence, $a$ number of samples. The $a$ sample variances may be combined to a single estimate as follows to obtain a single estimate of the population variance.
+
+$\frac{(n-1)S_1^2 + (n-1)S_2^2 + ... + (n-1)S_a^2}{(n-1) + (n-1) + ... + (n-1)} = \frac{\sum_{i=1}^a [\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2 ]}{\sum_{i=1}^a(n-1)} = \frac{SS_E}{(N-a)}$
+
+<span style="color:blue">Option 1</span>
+
+$\frac{SS_E}{(N-a)}$ <span style="color:red">is a pooled estimate of the common variance within each of the $a$ treatments</span>.
+
+---
+
+<span style="color:blue">Option 2</span>
+
+<span style="color:red">If there were no differences between</span> the $a$ treatment means, we could use the variation of the **treatment averages** from the **grand average** to estimate $\sigma^2$.
+
+$$\frac{SS_{Treatments}}{a-1} = \frac{n\sum_{i=1}^a (\bar{y}_{i.} - \bar{y}_{..})^2}{a-1}$$
+
+---
+
+## Two estimates 
+
+1. Based on the inherent variability within treatments
+
+2. Based on the variability between the treatments
+
+--
+
+If there are no differences in the treatment means, these estimates should be very similar, otherwise, we suspect the observed differences are due to **differences in the treatment means**.
+
+---
+
+## Expected values of mean squares
+
+$$E(MS_{E}) = E\left(\frac{SS_{E}}{N-a}\right) = \sigma^2$$
+
+
+$$E(MS_{Treatments}) = E\left(\frac{SS_{Treatments}}{a-1}\right) = \sigma^2 + \frac{n \sum_{i=1}^a \tau_{i}^2}{a-1}$$
+
+
+If there are no differences in treatment means $E(MS_{Treatments}) = \sigma^2$. If the treatment means do differ $E(MS_{Treatments}) > \sigma^2$. 
+
+Hence, it is clear by comparing $MS_{Treatments}$ and $MS_{E}$, we can check the hypothesis of no difference in treatment means.
+
+---
+
+## Assumptions: ANOVA
+
+$$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
+
+Errors are normally and independently distributed with mean zero and constant but unknown variance $\sigma^2$. 
+
+We can examine residuals to check the violations of the basic assumptions and model adequacy.
+
+---
+
+## Residuals
+
+
+Residual for observation $j$ in treatment $i$
+
+$$e_{ij} = y_{ij} - \hat{y}_{ij}$$
+
+where $\hat{y}_{ij}$ is an estimate of the corresponding observation $y_{ij}$.
+
+
+
+$$
+\begin{aligned}
+ \hat{y}_{ij} &= \hat{\mu} + \hat{\tau_{i}} \\
+  &= \bar{y}_{..} + (\bar{y}_{i.} - \bar{y}_{..}) \\
+  &= \bar{y}_{i.}
+\end{aligned}
+$$
+That is **estimate of any observation** in the $i$th treatment is just the corresponding treatment mean.
+
+---
+
+| Treatment (level) 	|  R1 	|  R2	| R3| R4	| R5 	| Totals 	|  Averages  	|
+|:---:	| :-----:	| :---:	| :---:	| :---:	| :---:	| :---:	|
+|  A	| $y_{11}$ <br> 8 <br> $e_{11}=-1.8$	| $y_{12}$ <br> 8	| $y_{13}$ <br> 15 | $y_{14}$ <br> 11	| $y_{15}$ <br> 7	|  $y_{1.}$  <br> 49	| $\bar{y}_{1.}$ <br> 9.8	|
+|  B	| $y_{21}$ <br> 11 	| $y_{22}$ <br> 17	| $y_{23}$ <br> 13 | $y_{24}$ <br> 18	| $y_{25}$ <br> 17	|  $y_{2.}$ <br>	76| $\bar{y}_{2.}$ <br> 15.2 	|
+|  C	| $y_{31}$ <br> 14 	| $y_{32}$ <br> 16	| $y_{33}$ <br> 18 | $y_{34}$ <br> 20	| $y_{35}$ <br> 20	|  $y_{3.}$ <br>	88| $\bar{y}_{3.}$ <br> 17.6 	|
+|  D	| $y_{41}$ <br> 20 	| $y_{42}$ <br> 24	| $y_{43}$ <br> 22 | $y_{44}$ <br> 19	| $y_{45}$ <br> 23	|  $y_{4.}$ <br> 108	| $\bar{y}_{4.}$ <br> 	21.6|
+|  E	| $y_{51}$ <br> 8 	| $y_{52}$ <br> 10	| $y_{53}$ <br> 12 | $y_{54}$ <br> 15	| $y_{55}$ <br> 12	|  $y_{5.}$ <br>	57| $\bar{y}_{5.}$ <br> 11.4 	|
+
+---
+
+### Step 1: Data entry
+
+.pull-left[
+```{r, comment=NA, message=FALSE, warning=FALSE}
+library(tidyverse)
+A <- c(8, 8, 15, 11, 7)
+B <- c(11, 17, 13, 18, 17)
+C <- c(14, 16, 18, 20, 20)
+D <- c(20, 24, 22, 19, 23)
+E <- c(8, 10, 12, 15, 12)
+df <- data.frame(A=A, B=B, C=C, D=D, E=E)
+df
+```
+
+]
+
+
+.pull-right[
+
+```{r, comment=NA}
+df <- df %>% pivot_longer(1:5, "Treatment",
+                          "value")
+df
+```
+
+]
+
+
+
+---
+
+### Step 2: ANOVA
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+one.way <- aov(value~ Treatment, data = df)
+summary(one.way)
+```
+
+---
+
+### Step 3: Residuals
+
+```{r, comment=NA}
+library(broom)
+residdf <- augment(one.way)
+residdf
+```
+
+---
+class: center, inverse, middle
+
+# Model diagnostic checking
+
+---
+
+# The normality assumption
+
+.pull-left[
+
+```{r, comment=NA, fig.height=4, fig.width=5}
+ggplot(residdf, 
+       aes(x=.resid))+
+  geom_histogram(colour="white")+ggtitle("Distribution of Residuals")
+```
+
+
+]
+
+
+.pull-right[
+
+```{r, comment=NA, fig.height=4, fig.width=4}
+ggplot(residdf, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+
+```
+
+]
+
+---
+
+# The normality assumption (cont.)
+
+```{r, comment=NA}
+shapiro.test(residdf$.resid)
+```
+
+---
+
+# Plot of residuals in time sequence
+
+This is helpful in detecting **correlation between residuals**. This is useful to check the validity of the independence assumption on the errors.
+
+```{r, comment=NA}
+residdf$Time <- 1:25
+residdf
+
+```
+
+---
+
+# Plot of residuals in time sequence (cont.)
+
+```{r, comment=NA, fig.height=4,}
+ggplot(data=residdf, aes(x=Time, y=.resid)) + geom_point()
+```
+
+Residuals should be structureless. Residuals should not contain any obvious patterns.
+
+---
+
+# Plot of residuals versus fitted values
+
+- To check the assumption of constant variance
+
+- Residuals should be structureless. Residuals should not contain any obvious patterns
+
+```{r, comment=NA, fig.height=4,}
+ggplot(data=residdf, aes(x=.fitted, y=.resid)) + geom_point()
+```
+
+---
+
+# Statistical Tests for Equality of Variance
+
+Bartlett's test
+
+$H_0: \sigma^2_1 = \sigma^2_2 = \sigma^2_3 = \sigma^2_4 = \sigma^2_5$
+
+$H_1: \text{above not true for at least one } \sigma^2_i$
+
+```{r, comment=NA}
+bartlett.test(value ~Treatment, residdf)
+```
+
+Bartlett's test is very sensitive to the assumption of normality. Hence, when the normality assumption is violated Bartlett's test should not be used.
+
+---
+
+Your turn: Bartlett's test
+
+Test statistics: 
+
+
+Distribution of test statistics under the null hypothesis:
+
+---
+
+## ANOVA
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+one.way <- aov(value ~ Treatment, data = df)
+summary(one.way)
+```
+
+---
+
+### Comparison among treatment means: multiple comparison
+
+.pull-left[
+```{r, comment=NA}
+TukeyHSD(one.way,  "Treatment")
+```
+
+]
+
+.pull-right[
+```{r, comment=NA, fig.height=6}
+plot(TukeyHSD(one.way,  "Treatment"))
+```
+
+]
+
+---
+
+.pull-left[
+```{r, comment=NA, fig.height=6}
+plot(TukeyHSD(one.way,  "Treatment"))
+```
+
+]
+
+.pull-right[
+```{r, comment=NA, fig.height=6, comment=NA, echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(data=df, aes(x=Treatment, y=value, col=Treatment)) +  geom_point(size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e")) + stat_summary(fun.y=mean, col="black", size=1, alpha=0.7)
+```
+
+]
