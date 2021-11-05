@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 225 2.0 Design and Analysis of Experiments</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr Thiyanga S. Talagala" />
+    <meta name="date" content="2021-11-05" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/duke-blue.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge-duke.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs/cc-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="libs/figure-captions.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 225 2.0 Design and Analysis of Experiments
+## Lecture 4
+### Dr Thiyanga S. Talagala
+### 2021-11-05
+
+---
+
+
+
+&lt;style&gt;
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 30px;
+}
+&lt;/style&gt;
+
+
+
+
+### Analysis of Variance (ANOVA)
+
+
+`$$\textbf{Variability}_\text{total} = \textbf{Variability}_\text{treatment} + \textbf{Variability}_\text{experimental error}$$`
+
+
+ANOVA is derived from decomposing the total sum of squares (partitioning of total variability into its component). 
+
+The total sum of squares ( `\(SS_T\)` )
+
+`$$SS_T = \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2.$$`
+
+`\(SS_T\)` measures the overall variability in the data.
+
+Number of degrees of freedom = `\(an-1 = N-1\)`
+
+---
+
+**Decomposition of the Total Sum of Squares**
+
+`$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..} + \bar{y}_{i.} - \bar{y}_{i.})^2$$`
+
+`\(\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^n [(\bar{y}_{i.} - \bar{y}_{..} ) + (y_{ij} - \bar{y}_{i.})]^2\)`
+
+`\(\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2\)`
+`\(\text{            }+ 2\sum_{i=1}^a\sum_{j=1}^n(\bar{y}_{i.} - \bar{y}_{..})(y_{ij}-\bar{y}_{i.})\)`
+
+The cross product term is zero. Hence,
+
+`$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$$`
+
+
+---
+
+`$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$$`
+
+`$$SS_T = SS_{Treatments} + SS_{E}$$`
+
+We see, the total variability in the data, measured by the total corrected sum of squares, can be partitioned into:
+
+- sum of squares of the differences &lt;span style="color:red"&gt;between&lt;/span&gt; the **treatment averages** and the **grand average** ( `\(SS_{Treatments}\)` - the sum of squares due to treatments (i.e., between treatments))
+
+- sum of squares of the differences of observations &lt;span style="color:red"&gt;within&lt;/span&gt; treatments from the **treatment average** ( `\(SS_{E}\)` is called the sum of squares due to error (i.e., within treatments))
+
+---
+
+
+`$$SS_E = SS_T - SS_{Treatments}$$`
+
+`$$MS_{Treatments} = \frac{SS_{Treatments}}{a-1}$$`
+
+`$$MS_{E} = \frac{SS_{E}}{N-a}$$`
+
+---
+
+
+
+`$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{..})^2 = n \sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + \sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2$$`
+
+`$$SS_T = SS_{Treatments} + SS_{E}$$`
+
+## Explore `\(SS_{E}\)`
+
+`$$\sum_{i=1}^a\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2 = \sum_{i=1}^a\left[\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2\right]$$`
+
+--
+
+Let's consider the term in the square bracket and divide it by `\(n-1\)`
+
+`$$S_i^2 = \frac{\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2}{n-1}, \text{ i = 1, 2, ..., a}$$`
+
+---
+
+`$$S_i^2 = \frac{\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2}{n-1}, \text{ i = 1, 2, ..., a}$$`
+
+`\(S_i^2\)` is the sample variance in the `\(i\)`th treatment.
+
+--
+
+We have `\(a\)` number of treatments. Hence, `\(a\)` number of samples. The `\(a\)` sample variances may be combined to a single estimate as follows to obtain a single estimate of the population variance.
+
+`\(\frac{(n-1)S_1^2 + (n-1)S_2^2 + ... + (n-1)S_a^2}{(n-1) + (n-1) + ... + (n-1)} = \frac{\sum_{i=1}^a [\sum_{j=1}^n (y_{ij} - \bar{y}_{i.})^2 ]}{\sum_{i=1}^a(n-1)} = \frac{SS_E}{(N-a)}\)`
+
+&lt;span style="color:blue"&gt;Option 1&lt;/span&gt;
+
+`\(\frac{SS_E}{(N-a)}\)` &lt;span style="color:red"&gt;is a pooled estimate of the common variance within each of the `\(a\)` treatments&lt;/span&gt;.
+
+---
+
+&lt;span style="color:blue"&gt;Option 2&lt;/span&gt;
+
+&lt;span style="color:red"&gt;If there were no differences between&lt;/span&gt; the `\(a\)` treatment means, we could use the variation of the **treatment averages** from the **grand average** to estimate `\(\sigma^2\)`.
+
+`$$\frac{SS_{Treatments}}{a-1} = \frac{n\sum_{i=1}^a (\bar{y}_{i.} - \bar{y}_{..})^2}{a-1}$$`
+
+---
+
+## Two estimates 
+
+1. Based on the inherent variability within treatments
+
+2. Based on the variability between the treatments
+
+--
+
+If there are no differences in the treatment means, these estimates should be very similar, otherwise, we suspect the observed differences are due to **differences in the treatment means**.
+
+---
+
+## Expected values of mean squares
+
+`$$E(MS_{E}) = E\left(\frac{SS_{E}}{N-a}\right) = \sigma^2$$`
+
+
+`$$E(MS_{Treatments}) = E\left(\frac{SS_{Treatments}}{a-1}\right) = \sigma^2 + \frac{n \sum_{i=1}^a \tau_{i}^2}{a-1}$$`
+
+
+If there are no differences in treatment means `\(E(MS_{Treatments}) = \sigma^2\)`. If the treatment means do differ `\(E(MS_{Treatments}) &gt; \sigma^2\)`. 
+
+Hence, it is clear by comparing `\(MS_{Treatments}\)` and `\(MS_{E}\)`, we can check the hypothesis of no difference in treatment means.
+
+---
+
+## Assumptions: ANOVA
+
+`$$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$`
+
+Errors are normally and independently distributed with mean zero and constant but unknown variance `\(\sigma^2\)`. 
+
+We can examine residuals to check the violations of the basic assumptions and model adequacy.
+
+---
+
+## Residuals
+
+
+Residual for observation `\(j\)` in treatment `\(i\)`
+
+`$$e_{ij} = y_{ij} - \hat{y}_{ij}$$`
+
+where `\(\hat{y}_{ij}\)` is an estimate of the corresponding observation `\(y_{ij}\)`.
+
+
+
+$$
+`\begin{aligned}
+ \hat{y}_{ij} &amp;= \hat{\mu} + \hat{\tau_{i}} \\
+  &amp;= \bar{y}_{..} + (\bar{y}_{i.} - \bar{y}_{..}) \\
+  &amp;= \bar{y}_{i.}
+\end{aligned}`
+$$
+That is **estimate of any observation** in the `\(i\)`th treatment is just the corresponding treatment mean.
+
+---
+
+| Treatment (level) 	|  R1 	|  R2	| R3| R4	| R5 	| Totals 	|  Averages  	|
+|:---:	| :-----:	| :---:	| :---:	| :---:	| :---:	| :---:	|
+|  A	| `\(y_{11}\)` &lt;br&gt; 8 &lt;br&gt; `\(e_{11}=-1.8\)`	| `\(y_{12}\)` &lt;br&gt; 8	| `\(y_{13}\)` &lt;br&gt; 15 | `\(y_{14}\)` &lt;br&gt; 11	| `\(y_{15}\)` &lt;br&gt; 7	|  `\(y_{1.}\)`  &lt;br&gt; 49	| `\(\bar{y}_{1.}\)` &lt;br&gt; 9.8	|
+|  B	| `\(y_{21}\)` &lt;br&gt; 11 	| `\(y_{22}\)` &lt;br&gt; 17	| `\(y_{23}\)` &lt;br&gt; 13 | `\(y_{24}\)` &lt;br&gt; 18	| `\(y_{25}\)` &lt;br&gt; 17	|  `\(y_{2.}\)` &lt;br&gt;	76| `\(\bar{y}_{2.}\)` &lt;br&gt; 15.2 	|
+|  C	| `\(y_{31}\)` &lt;br&gt; 14 	| `\(y_{32}\)` &lt;br&gt; 16	| `\(y_{33}\)` &lt;br&gt; 18 | `\(y_{34}\)` &lt;br&gt; 20	| `\(y_{35}\)` &lt;br&gt; 20	|  `\(y_{3.}\)` &lt;br&gt;	88| `\(\bar{y}_{3.}\)` &lt;br&gt; 17.6 	|
+|  D	| `\(y_{41}\)` &lt;br&gt; 20 	| `\(y_{42}\)` &lt;br&gt; 24	| `\(y_{43}\)` &lt;br&gt; 22 | `\(y_{44}\)` &lt;br&gt; 19	| `\(y_{45}\)` &lt;br&gt; 23	|  `\(y_{4.}\)` &lt;br&gt; 108	| `\(\bar{y}_{4.}\)` &lt;br&gt; 	21.6|
+|  E	| `\(y_{51}\)` &lt;br&gt; 8 	| `\(y_{52}\)` &lt;br&gt; 10	| `\(y_{53}\)` &lt;br&gt; 12 | `\(y_{54}\)` &lt;br&gt; 15	| `\(y_{55}\)` &lt;br&gt; 12	|  `\(y_{5.}\)` &lt;br&gt;	57| `\(\bar{y}_{5.}\)` &lt;br&gt; 11.4 	|
+
+---
+
+### Step 1: Data entry
+
+.pull-left[
+
+```r
+library(tidyverse)
+A &lt;- c(8, 8, 15, 11, 7)
+B &lt;- c(11, 17, 13, 18, 17)
+C &lt;- c(14, 16, 18, 20, 20)
+D &lt;- c(20, 24, 22, 19, 23)
+E &lt;- c(8, 10, 12, 15, 12)
+df &lt;- data.frame(A=A, B=B, C=C, D=D, E=E)
+df
+```
+
+```
+   A  B  C  D  E
+1  8 11 14 20  8
+2  8 17 16 24 10
+3 15 13 18 22 12
+4 11 18 20 19 15
+5  7 17 20 23 12
+```
+
+]
+
+
+.pull-right[
+
+
+```r
+df &lt;- df %&gt;% pivot_longer(1:5, "Treatment",
+                          "value")
+df
+```
+
+```
+# A tibble: 25 × 2
+   Treatment value
+   &lt;chr&gt;     &lt;dbl&gt;
+ 1 A             8
+ 2 B            11
+ 3 C            14
+ 4 D            20
+ 5 E             8
+ 6 A             8
+ 7 B            17
+ 8 C            16
+ 9 D            24
+10 E            10
+# … with 15 more rows
+```
+
+]
+
+
+
+---
+
+### Step 2: ANOVA
+
+
+```r
+one.way &lt;- aov(value~ Treatment, data = df)
+summary(one.way)
+```
+
+```
+            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Treatment    4  451.4  112.86   14.93 8.39e-06 ***
+Residuals   20  151.2    7.56                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
+### Step 3: Residuals
+
+
+```r
+library(broom)
+residdf &lt;- augment(one.way)
+```
+
+```
+Warning: Tidiers for objects of class aov are not maintained by the broom team,
+and are only supported through the lm tidier method. Please be cautious in
+interpreting and reporting broom output.
+```
+
+```r
+residdf
+```
+
+```
+# A tibble: 25 × 8
+   value Treatment .fitted .resid  .hat .sigma .cooksd .std.resid
+   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+ 1     8 A            9.80  -1.80 0.200   2.78  0.0268     -0.732
+ 2    11 B           15.2   -4.20 0.200   2.61  0.146      -1.71 
+ 3    14 C           17.6   -3.60 0.2     2.67  0.107      -1.46 
+ 4    20 D           21.6   -1.60 0.2     2.79  0.0212     -0.651
+ 5     8 E           11.4   -3.40 0.2     2.68  0.0956     -1.38 
+ 6     8 A            9.80  -1.80 0.2     2.78  0.0268     -0.732
+ 7    17 B           15.2    1.80 0.2     2.78  0.0268      0.732
+ 8    16 C           17.6   -1.60 0.2     2.79  0.0212     -0.651
+ 9    24 D           21.6    2.40 0.2     2.75  0.0476      0.976
+10    10 E           11.4   -1.40 0.2     2.80  0.0162     -0.569
+# … with 15 more rows
+```
+
+---
+class: center, inverse, middle
+
+# Model diagnostic checking
+
+---
+
+# The normality assumption
+
+.pull-left[
+
+
+```r
+ggplot(residdf, 
+       aes(x=.resid))+
+  geom_histogram(colour="white")+ggtitle("Distribution of Residuals")
+```
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+![](L4_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+
+]
+
+
+.pull-right[
+
+
+```r
+ggplot(residdf, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+```
+
+![](L4_DOE_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+# The normality assumption (cont.)
+
+
+```r
+shapiro.test(residdf$.resid)
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residdf$.resid
+W = 0.96073, p-value = 0.4291
+```
+
+---
+
+# Plot of residuals in time sequence
+
+This is helpful in detecting **correlation between residuals**. This is useful to check the validity of the independence assumption on the errors.
+
+
+```r
+residdf$Time &lt;- 1:25
+residdf
+```
+
+```
+# A tibble: 25 × 9
+   value Treatment .fitted .resid  .hat .sigma .cooksd .std.resid  Time
+   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt; &lt;int&gt;
+ 1     8 A            9.80  -1.80 0.200   2.78  0.0268     -0.732     1
+ 2    11 B           15.2   -4.20 0.200   2.61  0.146      -1.71      2
+ 3    14 C           17.6   -3.60 0.2     2.67  0.107      -1.46      3
+ 4    20 D           21.6   -1.60 0.2     2.79  0.0212     -0.651     4
+ 5     8 E           11.4   -3.40 0.2     2.68  0.0956     -1.38      5
+ 6     8 A            9.80  -1.80 0.2     2.78  0.0268     -0.732     6
+ 7    17 B           15.2    1.80 0.2     2.78  0.0268      0.732     7
+ 8    16 C           17.6   -1.60 0.2     2.79  0.0212     -0.651     8
+ 9    24 D           21.6    2.40 0.2     2.75  0.0476      0.976     9
+10    10 E           11.4   -1.40 0.2     2.80  0.0162     -0.569    10
+# … with 15 more rows
+```
+
+---
+
+# Plot of residuals in time sequence (cont.)
+
+
+```r
+ggplot(data=residdf, aes(x=Time, y=.resid)) + geom_point()
+```
+
+![](L4_DOE_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+Residuals should be structureless. Residuals should not contain any obvious patterns.
+
+---
+
+# Plot of residuals versus fitted values
+
+- To check the assumption of constant variance
+
+- Residuals should be structureless. Residuals should not contain any obvious patterns
+
+
+```r
+ggplot(data=residdf, aes(x=.fitted, y=.resid)) + geom_point()
+```
+
+![](L4_DOE_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+# Statistical Tests for Equality of Variance
+
+Bartlett's test
+
+`\(H_0: \sigma^2_1 = \sigma^2_2 = \sigma^2_3 = \sigma^2_4 = \sigma^2_5\)`
+
+`\(H_1: \text{above not true for at least one } \sigma^2_i\)`
+
+
+```r
+bartlett.test(value ~Treatment, residdf)
+```
+
+```
+
+	Bartlett test of homogeneity of variances
+
+data:  value by Treatment
+Bartlett's K-squared = 0.84527, df = 4, p-value = 0.9323
+```
+
+Bartlett's test is very sensitive to the assumption of normality. Hence, when the normality assumption is violated Bartlett's test should not be used.
+
+---
+
+Your turn: Bartlett's test
+
+Test statistics: 
+
+
+Distribution of test statistics under the null hypothesis:
+
+---
+
+## ANOVA
+
+
+
+```r
+one.way &lt;- aov(value ~ Treatment, data = df)
+summary(one.way)
+```
+
+```
+            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Treatment    4  451.4  112.86   14.93 8.39e-06 ***
+Residuals   20  151.2    7.56                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
+### Comparison among treatment means: multiple comparison
+
+.pull-left[
+
+```r
+TukeyHSD(one.way,  "Treatment")
+```
+
+```
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = value ~ Treatment, data = df)
+
+$Treatment
+     diff         lwr        upr     p adj
+B-A   5.4   0.1963648 10.6036352 0.0396033
+C-A   7.8   2.5963648 13.0036352 0.0018847
+D-A  11.8   6.5963648 17.0036352 0.0000122
+E-A   1.6  -3.6036352  6.8036352 0.8857969
+C-B   2.4  -2.8036352  7.6036352 0.6466099
+D-B   6.4   1.1963648 11.6036352 0.0114841
+E-B  -3.8  -9.0036352  1.4036352 0.2254122
+D-C   4.0  -1.2036352  9.2036352 0.1858647
+E-C  -6.2 -11.4036352 -0.9963648 0.0147894
+E-D -10.2 -15.4036352 -4.9963648 0.0000863
+```
+
+]
+
+.pull-right[
+
+```r
+plot(TukeyHSD(one.way,  "Treatment"))
+```
+
+![](L4_DOE_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+.pull-left[
+
+```r
+plot(TukeyHSD(one.way,  "Treatment"))
+```
+
+![](L4_DOE_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+![](L4_DOE_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

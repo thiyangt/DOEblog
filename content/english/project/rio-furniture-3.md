@@ -1,22 +1,12 @@
 ---
 bg_image: images/feature-bg.jpg
 category: DOE
-description: this is meta description
+description: Completely Randomized Experimental Design
 draft: false
 image: images/portfolio/work3.jpg
-information:
-- info: 15 October 2021
-  label: Start Date
-- info: -
-  label: ECompleted on
-- info: Online, Zoom
-  label: Location
-- info: NA
-  label: Quiz
-- info: ILO 1
-  label: Learning Outcome
-- info: Available
-  label: Practice Questions
 title: Week 3
 ---
 
+## Completely Randomized Experimental Design
+
+Slides: [click here](/slides/L3_DOE.html)
