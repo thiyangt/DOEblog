@@ -191,6 +191,7 @@ $$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
 
 Errors are normally and independently distributed with mean zero and constant but unknown variance $\sigma^2$. 
 
+
 We can examine residuals to check the violations of the basic assumptions and model adequacy.
 
 ---
