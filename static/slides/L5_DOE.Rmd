@@ -1,0 +1,159 @@
+---
+title: "STA 225 2.0 Design and Analysis of Experiments"
+subtitle: "Lecture 5"
+author: "Dr Thiyanga S. Talagala"
+date: "2021-11-09"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - default
+      - default-fonts
+      - duke-blue
+      - hygge-duke
+      - libs/cc-fonts.css
+      - libs/figure-captions.css
+      - xaringan-themer.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#081d58",
+  secondary_color = "#FF961C",
+ inverse_header_color = "#FFFFFF",
+ title_slide_text_color = "#edf8b1",
+ link_color =  "#41b6c4"
+)
+#style_solarized_light(text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"))
+#style_mono_light(
+#  base_color = "#1c5253",
+#  header_font_google = google_font("Josefin Sans"),
+#  text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"),
+#  code_font_google   = google_font("Fira Mono")
+#)
+```
+
+<style>
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+</style>
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 30px;
+}
+</style>
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+
+## Comparing Pairs of Treatment Means (cont.)
+
+**Tukey's Test** use the distribution of the **studentized range statistic**.
+
+$$q= \frac{\bar{y}_{max} - \bar{y}_{min}}{\sqrt{MS_E/n}}$$
+where, $\bar{y}_{max}$ is the largest sample mean and $\bar{y}_{min}$ is the smallest sample mean.
+
+
+$q_\alpha(a, f)$, 
+
+where $a$ is the number of treatments and $f$ is the number of degrees of freedom associated with the $MSE$.
+
+---
+
+## Tukey's Test
+
+For equal sample sizes
+
+$$T_\alpha = q_\alpha(a, f)\sqrt{\frac{MSE}{n}}$$
+
+When sample sizes are not equal
+
+$$T_\alpha = \frac{q_\alpha(a, f)}{\sqrt{2}}\sqrt{MSE(\frac{1}{n_i} + \frac{1}{n_j})}$$
+
+This is sometimes called **Tukey-Kramer procedure**.
+
+---
+
+## Example
+
+$q_{0.05}(5, 20) = 4.23$
+
+Hence $T_{0.05} = 4.23\sqrt{\frac{7.56}{5}} = 5.201352$
+
+$\bar{y}_{1.}=9.8$
+
+$\bar{y}_{2.}=15.2$
+
+$\bar{y}_{3.}=17.6$
+
+$\bar{y}_{4.}=21.6$
+
+$\bar{y}_{5.}=11.4$
+
+---
+
+If any pairs of treatment means differ in absolute value more than 5.20 imply that the corresponding pair of population means are significantly different.
+
+Example
+
+$\bar{y}_{1.} - \bar{y}_{2.} = 9.8-15.2 = -5.4$
+
+---
+
+## Estimation of the Model Parameters
+
+$$y_{ij} = \mu + \tau_i + \epsilon_{ij}$$
+
+Estimator of the overall mean (grand mean)
+
+$$\hat{\mu} = \bar{Y}_{..}$$
+
+Estimator of the treatment effect (difference between the treatment mean and grand mean)
+
+$$\hat{\tau_i} = \bar{Y}_{i.} - \bar{Y}_{..}$$
+
+where $i = 1, 2, ..., a$
+
+---
+
+The point estimator for $\mu_i$
+
+$$\hat{\mu_i} = \hat{\mu} + \hat{\tau_i} = \bar{Y}_{i.}$$
+
+
+Confidence interval for $\mu_i$
+
+We assume that the errors are normally distributed, each $\bar{y}_i$ is $NID(\mu_i, \sigma^2/n)$. We use MSE to estimate $\sigma^2$.
+
+Hence, $100(1-\alpha)$ percent confidence interval on the $i$th treatment mean $\mu_i$ is
+
+[ $\bar{y}_{i.} - t_{\alpha/2, N-a}\sqrt{\frac{MSE}{n}}$ , $\bar{y}_{i.} + t_{\alpha/2, N-a}\sqrt{\frac{MSE}{n}}$]
+
+---
+
+$100(1-\alpha)$ percent confidence interval on the difference in any two treatment means, $\mu_i - \mu_j$, would be
+
+[ $\bar{y}_{i.} - \bar{y}_{j.} - t_{\alpha/2, N-a}\sqrt{\frac{2MSE}{n}}$ , $\bar{y}_{i.} - \bar{y}_{j.} + t_{\alpha/2, N-a}\sqrt{\frac{2MSE}{n}}$]
+
+---
+
+## F distribution
+
+
+
