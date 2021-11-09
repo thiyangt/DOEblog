@@ -151,9 +151,15 @@ $100(1-\alpha)$ percent confidence interval on the difference in any two treatme
 
 [ $\bar{y}_{i.} - \bar{y}_{j.} - t_{\alpha/2, N-a}\sqrt{\frac{2MSE}{n}}$ , $\bar{y}_{i.} - \bar{y}_{j.} + t_{\alpha/2, N-a}\sqrt{\frac{2MSE}{n}}$]
 
+
+
+This is **one-at-a-time** confidence intervals. The confidence level $1-\alpha$ applies to only one particular estimate. 
+
 ---
 
-## F distribution
+## Example
+
+
 
 
 
