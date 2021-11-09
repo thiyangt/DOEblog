@@ -159,7 +159,21 @@ This is **one-at-a-time** confidence intervals. The confidence level $1-\alpha$ 
 
 ## Example
 
+In a study of the effectiveness of different rust inhibitors from brands (B1, B2, B3, B4) were tested. Altogether, 40 experimental units were randomly assigned to the 4 brands, with 10 units assigned to each brand.
 
+---
+
+```{r, comment=NA}
+b1 <- round(rnorm(10, mean=40, sd=1), 1)
+b2 <- round(rnorm(10, mean=41, sd=1), 1)
+b3 <- round(rnorm(10, mean=50, sd=1), 1)
+b4 <- round(rnorm(10, mean=60, sd=1), 1)
+df <- data.frame(b1=b1, b2=b2, b3=b3, b4=b4)
+df
+
+```
+
+---
 
 
 
