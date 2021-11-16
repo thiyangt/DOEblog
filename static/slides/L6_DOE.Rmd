@@ -228,5 +228,7 @@ Number of treatments: $a$
 
 Number of blocks: $b$
 
+---
+
 "There is one observation per treatment in each block, and the order in which the treatments are run within each block is determined randomly. Because the only, randomization of treatment is within the blocks, we often say that the blocks represent **a restriction on randomization**". (Montgomery, Design and Analysis of Experiments, 2001)
 
