@@ -1,0 +1,232 @@
+---
+title: "STA 225 2.0 Design and Analysis of Experiments"
+subtitle: "Lecture 7"
+author: "Dr Thiyanga S. Talagala"
+date: "2021-11-16"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - default
+      - default-fonts
+      - duke-blue
+      - hygge-duke
+      - libs/cc-fonts.css
+      - libs/figure-captions.css
+      - xaringan-themer.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#081d58",
+  secondary_color = "#FF961C",
+ inverse_header_color = "#FFFFFF",
+ title_slide_text_color = "#edf8b1",
+ link_color =  "#41b6c4"
+)
+#style_solarized_light(text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"))
+#style_mono_light(
+#  base_color = "#1c5253",
+#  header_font_google = google_font("Josefin Sans"),
+#  text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"),
+#  code_font_google   = google_font("Fira Mono")
+#)
+```
+
+<style>
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+</style>
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 30px;
+}
+</style>
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+
+# Completely randomized design
+
+## Advantages of CRD
+
+- Easy to design
+
+- Analysis of data is simple and straight forward
+
+- Even if some values are missing the analysis can be done
+
+## Disadvantages of CRD
+
+- The design requires homogeneous set of experimental units
+
+- If the experimental units are not homogeneous, error component will be large and this will make the treatment comparison less efficient.
+
+---
+
+# Randomized Complete Block Design (RCBD)
+
+
+- Suppose we want to compare $r$ treatments
+
+- To run a CRD, we need to find $n_1 + n_2 + .... + n_r$ **homogeneous** experimental units to apply treatment.
+
+- Often it is difficult to find enough experimental homomogeneous units.
+
+- However, it may be possible to find **several blocks of experimental units, with enough homogeneous experimental units** to apply $r$ treatments.
+
+- RCBD can be used to compare treatment means in such situations even though there are differences between blocks.
+
+---
+
+## Nuisance factor
+
+A factor that has an effect on the response, but we are not interested in that effect.
+
+
+- **Unknown and uncontrollable: ** *Randomization* to balance out its effect 
+
+
+- **Known and uncontrollable but measurable:** *Analysis of covariance (ANCOVA)*  (at the time of the analysis)
+
+- Nuisance source of variability is **Known and controllable**: use *Blocking* to systematically eliminate its effect on the statistical comparison among treatment means.
+
+---
+
+## Example
+
+We want to test the difference between different fertilizers (A, B, C, D, E, F) on strawberry yield. The experimenter has decided to obtain four observations for each fertilizer type.
+
+--
+How many experimental units are required to compare the treatments?
+
+---
+
+![](farm.jpeg)
+
+---
+
+## Example (cont.)
+
+The experiment is run at 4 different locations having 6 different plots of land each. Hence, a block is given by a location and an experimental unit by a plot of land.
+
+---
+
+## Example (cont.)
+
+- randomized complete block design (RCBD) 
+
+- the experimental units are homogeneous within a block
+
+- within each block, the 6 treatments are randomly assigned to 6 experimental units
+
+- each block (farms) contains all the treatments (fertilizer)
+
+- the design is called **complete** because we see the complete set of treatments within every block 
+
+
+---
+
+## RCBD
+
+In-class diagram
+
+
+
+---
+
+## RCBD
+
+### Randomization:
+
+- Number the $a$  treatments $1,2,…,a$.
+
+- First form the homogeneous blocks of the experimental units. Then allocate each treatment randomly in each block. 
+
+    - Number the units in each block as $1, 2,...,a$.
+    - Randomly allocate the $a$ treatments to $a$ experimental units in each block
+
+
+---
+## RCBD
+
+### Replication
+
+Since each block contains all the treatments, so every treatment will appear in all the blocks. So each
+treatment can be considered as if replicated the number of times as the number of blocks. Hence, in RBD, the
+number of blocks and the number of replications are same.
+
+
+---
+
+
+## Your turn
+
+
+Question: How the 4 diets (A, B, C, and D) affect the coagulation of rabbits? 
+
+Treatment: Diet
+
+Factor levels: A, B, C, D
+
+Response: Time in seconds that it takes for a cut to stop bleeding (coagulation rate).
+
+Experimental unit: 16 rabits
+
+Replicates: 4
+
+
+There are 16 rabbits (same age, weight, height) 
+
+---
+background-image: url('bunnies.jpeg')
+background-position: center
+background-size: cover
+
+## Your turn
+
+<span style="color: white;">Which approach do you use to analyze the data? CRD or RCBD</span>
+
+
+
+---
+
+Have a jar with the letters A, B, C, D written on separate slips. Catch a rabbit, pick a slip at random from the bowl and assign the rabbit to the diet letter on the slip. Do not replace the slip. Catch the second rabbit and select another slip from the remaining three slips. Assign that treatment to the second rabbit. Continue until the first four rabbits are assigned one of the four diets. Replace the slips and repeat the procedure untill all rabbits are assigned to a diet. 
+
+#### Which approach do you use to analyze the data? CRD or RCBD
+
+---
+
+## Notations
+
+|  Block 1 	|  Block 2	|  ...	| Block b 	| 
+|:---:	| :-----:	| :---:	| :---:	| 
+| $y_{11}$ 	|  $y_{12}$	|  ...	| $y_{1b}$	|  
+| $y_{21}$ 	| $y_{22}$ 	| ... 	| $y_{2b}$ 	| 
+|  .	|  	|  	|  	|  
+|  .	|  	|  	|  	|  
+|  .	|  	|  	|  	| 
+| $y_{a1}$ 	| $y_{a2}$ 	|  ...	| $y_{ab}$ 	| 
+
+
+Number of treatments: $a$
+
+Number of blocks: $b$
+
+"There is one observation per treatment in each block, and the order in which the treatments are run within each block is determined randomly. Because the only, randomization of treatment is within the blocks, we often say that the blocks represent **a restriction on randomization**". (Montgomery, Design and Analysis of Experiments, 2001)
+

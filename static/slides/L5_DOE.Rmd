@@ -164,6 +164,7 @@ In a study of the effectiveness of different rust inhibitors from brands (B1, B2
 ---
 
 ```{r, comment=NA}
+set.seed(10)
 b1 <- round(rnorm(10, mean=40, sd=1), 1)
 b2 <- round(rnorm(10, mean=41, sd=1), 1)
 b3 <- round(rnorm(10, mean=50, sd=1), 1)
