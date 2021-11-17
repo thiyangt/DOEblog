@@ -709,7 +709,13 @@ are due to treatment effects or instrument miscalibrations.
 - Blocking
 
 
+---
 
+# Acknowledgement
+
+Some of the slide content is based on
+
+Montgomery, D. C. (2017). Design and analysis of experiments. John wiley & sons.
 
 
 
