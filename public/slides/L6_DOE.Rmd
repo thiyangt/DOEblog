@@ -499,7 +499,11 @@ df <- data.frame(tip=tip, coupon1=coupon1, coupon2=coupon2, coupon3=coupon3, cou
 df
 ```
 
+---
 
+```{r, comment=NA}
+summary(df[, 2:5])
+```
 
 ---
 
@@ -508,6 +512,8 @@ library(tidyverse)
 df.pl <- df %>% pivot_longer(2:5, "Block", "value")
 df.pl
 ```
+
+
 ---
 
 ## Block
