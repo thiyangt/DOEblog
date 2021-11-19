@@ -4,7 +4,6 @@
     <title>STA 225 2.0 Design and Analysis of Experiments</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr Thiyanga S. Talagala" />
-    <meta name="date" content="2021-11-16" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -13,15 +12,16 @@
     <link rel="stylesheet" href="libs/cc-fonts.css" type="text/css" />
     <link rel="stylesheet" href="libs/figure-captions.css" type="text/css" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
 # STA 225 2.0 Design and Analysis of Experiments
-## Lecture 7
+## Lecture 7 - 8
 ### Dr Thiyanga S. Talagala
-### 2021-11-16
+### 2021-11-16/ 2021-11-19
 
 ---
 
@@ -42,7 +42,7 @@ class: center, middle, inverse, title-slide
 
 &lt;style type="text/css"&gt;
 .remark-slide-content {
-    font-size: 30px;
+    font-size: 27px;
 }
 &lt;/style&gt;
 
@@ -220,6 +220,364 @@ Number of blocks: `\(b\)`
 ---
 
 "There is one observation per treatment in each block, and the order in which the treatments are run within each block is determined randomly. Because the only, randomization of treatment is within the blocks, we often say that the blocks represent **a restriction on randomization**". (Montgomery, Design and Analysis of Experiments, 2001)
+
+
+---
+
+## Statistical Model for the RCBD
+
+
+**1. Mean model**
+
+`$$Y_{ij}= \mu_{ij} + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., b           
+\end{cases}$$`
+
+
+
+`\(a\)` - number of treatments
+
+`\(b\)` - number of blocks
+
+`\(\mu_{ij}\)` - mean of the `\(i\)`th factor level or treatment and `\(j\)`th block
+
+`\(\epsilon_{ij}\)` - random error  (It is assumed `\(\epsilon_{ij}\)`'s are independent and `\(N(0, \sigma^2)\)`)
+
+
+
+
+---
+
+Let
+
+`\(\mu\)` - overall mean,
+
+`\(\tau_i\)` - effect of the `\(i\)`th treatment,
+
+`\(\beta_j\)` - effect of the `\(j\)`th block,
+
+
+
+
+Then, `\(\mu_{ij} = \mu + \tau_i + \beta_j\)`.
+
+---
+
+## Statistical Model for the RCBD
+
+
+**2. Effects model**
+
+
+`$$Y_{ij}= \mu + \tau_i + \beta_j + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., b           
+\end{cases}$$`
+
+
+
+.pull-left[
+
+`\(a\)` - number of treatments
+
+`\(b\)` - number of blocks
+
+`\(\mu\)` - overall mean
+
+]
+
+.pull-right[
+
+`\(\tau_i\)` - effect of the `\(i\)`th treatment
+
+`\(\beta_j\)` - effect of the `\(j\)`th block
+
+`\(\epsilon_{ij}\)` - random error with `\(NID(0, \sigma^2)\)`
+
+]
+
+
+---
+
+## Two constraints
+
+Treatment effect and block effects are the deviations from the overall mean. Hence
+
+`$$\sum_{i=1}^a\tau_i=0$$`
+and
+
+`$$\sum_{j=1}^b\beta_j = 0$$`
+
+
+---
+## In-class
+
+In CRD
+
+`$$Y_{ij}= \mu + \tau_i + \epsilon_{ij}
+\begin{cases}
+     i=1, 2, ..., a \\
+    j=1, 2, ..., n           
+\end{cases}$$`
+
+
+`$$\tau_i = \mu + \mu_i, \text{ } i=1, 2, ...a$$`
+
+`$$\frac{\sum_{i=1}^a \mu_i}{a} = \mu$$`
+
+This definition implies
+
+`$$\sum_{i=1}^a\tau_i = 0$$`
+---
+
+# In-class
+
+
+
+---
+class: center, middle
+
+## Hypothesis - RCBD
+
+---
+
+We want to test the **equality of the treatment means**
+
+`$$H_0: \mu_1 = \mu_2 = ... = \mu_a$$`
+`$$H_1: \text{at least one }\mu_i \neq \mu_j$$`
+
+The `\(i\)`th treatment mean can be written as
+
+`$$\mu_i = \frac{\sum_{j=1}^b(\mu + \tau_i + \beta_j)}{b} = \mu + \tau_i.$$`
+Hence, an equivalent way of writing the above hypothesis
+
+`$$H_0: \tau_1 = \tau_2 = ... = \tau_a = 0$$`
+`$$H_1: \tau_i \neq 0\text{ at least one } i$$`
+
+---
+
+# Notations
+
+`\(y_{i.}\)` - total of all observations taken under treatment `\(i\)`
+
+&gt; *Write the mathematical equation*
+
+`\(y_{.j}\)` - total of all observations in block `\(j\)`
+
+&gt; *Write the mathematical  equation*
+
+`\(y_{..}\)` - the grand total of all observations
+
+&gt; *Write the  mathematical  equation*
+
+`\(N=ab\)` be the total number of observations
+
+---
+
+## Notations
+
+`\(\bar{y}_{i.}\)` - the average of the observations taken under treatment `\(i\)`
+
+
+`\(\bar{y}_{.j}\)` - the average of the observations in block `\(j\)`
+
+
+`\(\bar{y}_{..}\)` - the grand average of all observations
+
+`$$\bar{y}_{i.} = \frac{y_{i.}}{b}$$`
+
+`$$\bar{y}_{.j} = \frac{y_{.j}}{a}$$`
+
+`$$\bar{y}_{..} = \frac{y_{..}}{N}$$`
+
+---
+
+We express the total corrected sum of squares 
+
+
+`$$\sum_{i=1}^a\sum_{j=1}^b (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^b[(\bar{y}_{i.} - \bar{y}_{..}) + (\bar{y}_{.j} - \bar{y}_{..}) + (y_{ij} - \bar{y}_{i.} - \bar{y}_{.j} + \bar{y}_{..})]^2$$`
+
+
+
+Note: 
+
+- The **sum of squares** is the **sum of the squared values of a variable**. 
+
+- For example the total corrected sum of squares is the sum of the squared values after subtracting (i.e. correcting for) their mean.
+
+
+---
+
+## Your turn
+
+`$$\sum_{i=1}^a\sum_{j=1}^b (y_{ij} - \bar{y}_{..})^2 = \sum_{i=1}^a\sum_{j=1}^b[(\bar{y}_{i.} - \bar{y}_{..}) + (\bar{y}_{.j} - \bar{y}_{..}) + (y_{ij} - \bar{y}_{i.} - \bar{y}_{.j} + \bar{y}_{..})]^2$$`
+
+Show that the above can be simplified into
+
+
+`$$\sum_{i=1}^a\sum_{j=1}^b (y_{ij} - \bar{y}_{..})^2 = b\sum_{i=1}^a(\bar{y}_{i.} - \bar{y}_{..})^2 + a\sum_{j=1}^b(\bar{y}_{.j} - \bar{y}_{..})^2 + \\ \sum_{i=1}^a\sum_{j=1}^b (y_{ij} - \bar{y}_{.j} - \bar{y}_{i.} + 
+\bar{y}_{..})$$`
+
+
+`$$SS_T = SS_{Treatment} + SS_{Block} + SS_{E}$$`
+
+
+
+---
+
+## ANOVA Table
+
+Source of variation |  Sum of squares (SS) | DF| Mean Square (MS) | F| p-value |
+---:---:---:---:---:---|
+Treatments |  `\(SS_{Treatments}\)` | `\(a-1\)` | `\(MS_{Treatments}\)` | `\(F_0=\frac{MS_{Treatments}}{MS_E}\)` | `\(P(F \geq F_0)\)`|
+Blocks |  `\(SS_{Blocks}\)` | `\(b-1\)` | `\(MS_{Blocks}\)` |  | |
+Error  | `\(SS_E\)` | `\((a-1)(b-1)\)` | `\(MS_{E}\)` | |
+Total |  `\(SS_T\)` | `\(N-1\)`| | | |
+
+---
+
+### Example
+
+Section 4.1, Montgomery, D. C. (2017). Design and analysis of experiments. John wiley &amp; sons.
+
+Experiment: Hardness testing experiment
+
+- We wish to determine whether 4 different tips produce
+different (mean) hardness reading on a hardness tester.
+
+- A hardness testing machine operates by pressing a tip into a metal test
+“coupon.” 
+
+- The hardness of the coupon is measured from the depth of the
+resulting depression. - **Response variable**
+
+- Four tip types are being tested to see if they produce
+significantly different readings. - **Treatment**
+
+---
+
+### Example (cont.)
+
+
+- The coupons might differ slightly in their
+hardness (for example, if they are taken from ingots produced in different heats). - **Block**
+
+- Within each coupon (block) the order in which the
+four tips were tested was randomly determined.
+
+
+References: https://web.ma.utexas.edu/users/mks/384Esp08/rcbdexample.pdf
+
+---
+
+### Example (cont.)
+
+
+```r
+tip &lt;- c(1, 2, 3, 4)
+coupon1 &lt;- c(9.3, 9.4, 9.2, 9.7)
+coupon2 &lt;- c(9.4, 9.3, 9.4, 9.6)
+coupon3 &lt;- c(9.6, 9.8, 9.5, 10.0)
+coupon4 &lt;- c(10.0, 9.9, 9.7, 10.2)
+df &lt;- data.frame(tip=tip, coupon1=coupon1, coupon2=coupon2, coupon3=coupon3, coupon4=coupon4)
+df
+```
+
+```
+  tip coupon1 coupon2 coupon3 coupon4
+1   1     9.3     9.4     9.6    10.0
+2   2     9.4     9.3     9.8     9.9
+3   3     9.2     9.4     9.5     9.7
+4   4     9.7     9.6    10.0    10.2
+```
+
+
+
+---
+
+
+```r
+library(tidyverse)
+df.pl &lt;- df %&gt;% pivot_longer(2:5, "Block", "value")
+df.pl
+```
+
+```
+# A tibble: 16 × 3
+     tip Block   value
+   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+ 1     1 coupon1   9.3
+ 2     1 coupon2   9.4
+ 3     1 coupon3   9.6
+ 4     1 coupon4  10  
+ 5     2 coupon1   9.4
+ 6     2 coupon2   9.3
+ 7     2 coupon3   9.8
+ 8     2 coupon4   9.9
+ 9     3 coupon1   9.2
+10     3 coupon2   9.4
+11     3 coupon3   9.5
+12     3 coupon4   9.7
+13     4 coupon1   9.7
+14     4 coupon2   9.6
+15     4 coupon3  10  
+16     4 coupon4  10.2
+```
+---
+
+## Block
+
+.pull-left[
+
+![](L6_DOE_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+![](L6_DOE_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+]
+
+
+---
+
+
+## Treatment
+
+.pull-left[
+
+![](L6_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+![](L6_DOE_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+## ANOVA
+
+
+```r
+two.way &lt;- aov(value~ tip + Block, data = df.pl)
+summary(two.way)
+```
+
+```
+            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+tip          3  0.385 0.12833   14.44 0.000871 ***
+Block        3  0.825 0.27500   30.94 4.52e-05 ***
+Residuals    9  0.080 0.00889                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
 
 ---
 
