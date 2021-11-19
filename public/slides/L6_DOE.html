@@ -545,17 +545,29 @@ df.pl
 
 ---
 
+
+```r
+library(tidyverse)
+df.pl$tip &lt;- as.factor(df.pl$tip)
+df.block &lt;- df.pl %&gt;% group_by(Block) %&gt;% summarize(mean = mean(value))
+df.treatment &lt;- df.pl %&gt;% group_by(tip) %&gt;% summarize(mean = mean(value))
+```
+
+---
+
+
+
 ## Block
 
 .pull-left[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -567,13 +579,13 @@ df.pl
 
 .pull-left[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
 ]
 

@@ -545,17 +545,54 @@ df.pl
 
 ---
 
+
+```r
+library(tidyverse)
+df.pl$tip &lt;- as.factor(df.pl$tip)
+df.block &lt;- df.pl %&gt;% group_by(Block) %&gt;% summarize(mean = mean(value))
+df.block
+```
+
+```
+# A tibble: 4 × 2
+  Block    mean
+  &lt;chr&gt;   &lt;dbl&gt;
+1 coupon1  9.4 
+2 coupon2  9.43
+3 coupon3  9.72
+4 coupon4  9.95
+```
+
+```r
+df.treatment &lt;- df.pl %&gt;% group_by(tip) %&gt;% summarize(mean = mean(value))
+df.treatment
+```
+
+```
+# A tibble: 4 × 2
+  tip    mean
+  &lt;fct&gt; &lt;dbl&gt;
+1 1      9.57
+2 2      9.6 
+3 3      9.45
+4 4      9.88
+```
+
+---
+
+
+
 ## Block
 
 .pull-left[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ]
 
@@ -567,13 +604,13 @@ df.pl
 
 .pull-left[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
 
-![](L6_DOE_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](L6_DOE_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
 ]
 

@@ -516,12 +516,25 @@ df.pl
 
 ---
 
+```{r, message=FALSE, warning=FALSE, comment=NA}
+library(tidyverse)
+df.pl$tip <- as.factor(df.pl$tip)
+df.block <- df.pl %>% group_by(Block) %>% summarize(mean = mean(value))
+df.treatment <- df.pl %>% group_by(tip) %>% summarize(mean = mean(value))
+```
+
+---
+
+
+
 ## Block
 
 .pull-left[
 
 ```{r, comment=NA, echo=FALSE}
-ggplot(data=df.pl, aes(x=Block, y=value, col=Block)) +  geom_point(size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a")) 
+ggplot(data=df.pl, aes(x=Block, y=value, col=Block)) +  geom_point(size=3) +
+#  geom_crossbar(data=df.block, aes(ymin=mean, ymax=mean), size=1, col="red", width = .5) + 
+  scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a"))  
 ```
 
 ]
@@ -543,7 +556,7 @@ ggplot(data=df.pl, aes(x=Block, y=value, col=Block)) + geom_boxplot(aes(fill=Blo
 .pull-left[
 
 ```{r, comment=NA, echo=FALSE}
-df.pl$tip <- as.factor(df.pl$tip)
+
 ggplot(data=df.pl, aes(x=tip, y=value, col=tip)) +  geom_point(size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a")) 
 ```
 
