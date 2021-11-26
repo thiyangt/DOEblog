@@ -1,8 +1,8 @@
 ---
 title: "STA 225 2.0 Design and Analysis of Experiments"
-subtitle: "Lecture 7 - 8"
+subtitle: "Lecture 7 - 9"
 author: "Dr Thiyanga S. Talagala"
-date: "2021-11-16/ 2021-11-19"
+date: "2021-11-16/ 2021-11-19/ 2021-11-26"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -58,7 +58,7 @@ style_duo_accent(
 }
 </style>
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+options(htmltools.dir.version = FALSE, warnings=FALSE, message=FALSE)
 ```
 
 
@@ -557,9 +557,9 @@ ggplot(data=df.pl, aes(x=Block, y=value, col=Block)) + geom_boxplot(aes(fill=Blo
 
 .pull-left[
 
-```{r, comment=NA, echo=FALSE}
+```{r, comment=NA, echo=FALSE, warning=FALSE, message=FALSE}
 
-ggplot(data=df.pl, aes(x=tip, y=value, col=tip)) +  geom_point(size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a")) 
+ggplot(data=df.pl, aes(x=tip, y=value, col=tip)) +  geom_point(size=3) + scale_color_manual(values=c("#1b9e77", "#d95f02", "#7570b3", "#e7298a"))+ stat_summary(fun.y=mean, col="black", size=1, alpha=0.7)
 ```
 
 ]
@@ -581,6 +581,174 @@ ggplot(data=df.pl, aes(x=tip, y=value, col=tip)) + geom_boxplot(aes(fill=tip), a
 two.way <- aov(value~ tip + Block, data = df.pl)
 summary(two.way)
 ```
+
+---
+class: center, middle
+
+
+# Model Adequacy Checking
+
+---
+
+## Residuals
+
+```{r, comment=NA}
+library(broom)
+residdf <- augment(two.way)
+residdf
+```
+
+
+---
+
+# The normality assumption
+
+.pull-left[
+
+```{r, comment=NA, fig.height=4, fig.width=5}
+ggplot(residdf, 
+       aes(x=.resid))+
+  geom_histogram(colour="white")+ggtitle("Distribution of Residuals")
+```
+
+
+]
+
+
+.pull-right[
+
+```{r, comment=NA, fig.height=4, fig.width=4}
+ggplot(residdf, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+
+```
+
+]
+
+---
+
+# The normality assumption (cont.)
+
+```{r, comment=NA}
+shapiro.test(residdf$.resid)
+```
+
+---
+
+
+
+# Plot of the residuals vs type
+
+```{r, comment=NA, fig.height=4,}
+ggplot(data=residdf, aes(x=tip, y=.resid)) + geom_point() 
+```
+
+
+---
+
+# Plot of the residuals vs block
+
+```{r, comment=NA, fig.height=4,}
+ggplot(data=residdf, aes(x=Block, y=.resid)) + geom_point() 
+```
+
+---
+
+# Plot of residuals versus fitted values
+
+- To check the assumption of constant variance
+
+- Residuals should be structureless. Residuals should not contain any obvious patterns
+
+```{r, comment=NA, fig.height=4,}
+ggplot(data=residdf, aes(x=.fitted, y=.resid)) + geom_point()
+```
+
+---
+
+## ANOVA - Computing formulas
+
+
+$$SS_T = \sum_{i=1}^{a}\sum_{j=1}^b y_{ij}^2 - \frac{y_{..}^2}{N}$$
+$$SS_{Treatments} = \frac{1}{b}\sum_{i=1}^a y_{i.}^2 - \frac{y_{..}^2}{N}$$
+
+$$SS_{Blocks} = \frac{1}{a}\sum_{i=j=1}^b y_{.j}^2 - \frac{y_{..}^2}{N}$$
+
+$$SS_{E} = SS_{T} - SS_{Treatments} - SS_{Blocks}$$
+
+---
+
+## Expected value of mean squares, if treatments and blocks are fixed
+
+$$E(MS_{Treatments}) = \sigma^2 + \frac{b\sum_{i=1}^a \tau_i^2}{a-1}$$
+
+
+$$E(MS_{Blocks}) = \sigma^2 + \frac{a\sum_{j=1}^b \beta_j^2}{b-1}$$
+
+$$E(MS_{E}) = \sigma^2 $$
+
+
+---
+
+
+
+### Test the equality of treatment means
+
+$$F_0 = \frac{MS_{Treatments}}{MS_E}$$
+which is distributed as $F_{a-1, (a-1)(b-1)}$
+
+
+
+### Comparing block treatment means
+
+$$F_0 = \frac{MS_{Blocks}}{MS_E}$$
+which is distributed as $F_{b-1, (a-1)(b-1)}$
+
+
+
+
+---
+
+## RCBD - Multiple Comparisons
+
+- The rejection of the null hypothesis indicates a significant difference in
+treatment means. 
+
+- Any of the multiple comparison methods can be used
+for detecting which means are significantly different. In this course we use, Tukey's
+method can be used. 
+
+- In general we are not interested to compare block
+means.
+
+---
+
+
+.pull-left[
+```{r, comment=NA}
+TukeyHSD(two.way,  "tip")
+```
+
+]
+
+.pull-right[
+```{r, comment=NA, fig.height=6}
+plot(TukeyHSD(two.way,  "tip"))
+```
+
+]
+
+---
+
+## Randomized Incomplete Block Designs
+
+Every treatment is not present in every block
+
+## Balanced Incomplete Block Design (BIBD)
+
+All pairs of treatments occur together within a block an equal number of times
+
 
 ---
 

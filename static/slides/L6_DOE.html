@@ -19,9 +19,9 @@
 class: center, middle, inverse, title-slide
 
 # STA 225 2.0 Design and Analysis of Experiments
-## Lecture 7 - 8
+## Lecture 7 - 9
 ### Dr Thiyanga S. Talagala
-### 2021-11-16/ 2021-11-19
+### 2021-11-16/ 2021-11-19/ 2021-11-26
 
 ---
 
@@ -632,6 +632,253 @@ Residuals    9  0.080 0.00889
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
+
+---
+class: center, middle
+
+
+# Model Adequacy Checking
+
+---
+
+## Residuals
+
+
+```r
+library(broom)
+residdf &lt;- augment(two.way)
+```
+
+```
+Warning: Tidiers for objects of class aov are not maintained by the broom team,
+and are only supported through the lm tidier method. Please be cautious in
+interpreting and reporting broom output.
+```
+
+```r
+residdf
+```
+
+```
+# A tibble: 16 × 9
+   value tip   Block   .fitted  .resid  .hat .sigma  .cooksd .std.resid
+   &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+ 1   9.3 1     coupon1    9.35 -0.0500 0.438 0.0972 5.56e- 2     -0.707
+ 2   9.4 1     coupon2    9.38  0.0250 0.438 0.0993 1.39e- 2      0.354
+ 3   9.6 1     coupon3    9.67 -0.0750 0.438 0.0935 1.25e- 1     -1.06 
+ 4  10   1     coupon4    9.9   0.100  0.438 0.0882 2.22e- 1      1.41 
+ 5   9.4 2     coupon1    9.38  0.0250 0.437 0.0993 1.39e- 2      0.354
+ 6   9.3 2     coupon2    9.4  -0.100  0.438 0.0882 2.22e- 1     -1.41 
+ 7   9.8 2     coupon3    9.7   0.100  0.437 0.0882 2.22e- 1      1.41 
+ 8   9.9 2     coupon4    9.93 -0.0250 0.437 0.0993 1.39e- 2     -0.354
+ 9   9.2 3     coupon1    9.22 -0.0250 0.438 0.0993 1.39e- 2     -0.354
+10   9.4 3     coupon2    9.25  0.150  0.438 0.0707 5.00e- 1      2.12 
+11   9.5 3     coupon3    9.55 -0.0500 0.438 0.0972 5.56e- 2     -0.707
+12   9.7 3     coupon4    9.78 -0.0750 0.438 0.0935 1.25e- 1     -1.06 
+13   9.7 4     coupon1    9.65  0.0500 0.438 0.0972 5.56e- 2      0.707
+14   9.6 4     coupon2    9.68 -0.0750 0.438 0.0935 1.25e- 1     -1.06 
+15  10   4     coupon3    9.98  0.0250 0.437 0.0993 1.39e- 2      0.354
+16  10.2 4     coupon4   10.2   0      0.438 0.100  2.81e-30      0    
+```
+
+
+---
+
+# The normality assumption
+
+.pull-left[
+
+
+```r
+ggplot(residdf, 
+       aes(x=.resid))+
+  geom_histogram(colour="white")+ggtitle("Distribution of Residuals")
+```
+
+```
+`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+![](L6_DOE_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+
+]
+
+
+.pull-right[
+
+
+```r
+ggplot(residdf, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+```
+
+![](L6_DOE_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+# The normality assumption (cont.)
+
+
+```r
+shapiro.test(residdf$.resid)
+```
+
+```
+
+	Shapiro-Wilk normality test
+
+data:  residdf$.resid
+W = 0.93957, p-value = 0.3438
+```
+
+---
+
+
+
+# Plot of the residuals vs type
+
+
+```r
+ggplot(data=residdf, aes(x=tip, y=.resid)) + geom_point() 
+```
+
+![](L6_DOE_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+
+---
+
+# Plot of the residuals vs block
+
+
+```r
+ggplot(data=residdf, aes(x=Block, y=.resid)) + geom_point() 
+```
+
+![](L6_DOE_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+
+# Plot of residuals versus fitted values
+
+- To check the assumption of constant variance
+
+- Residuals should be structureless. Residuals should not contain any obvious patterns
+
+
+```r
+ggplot(data=residdf, aes(x=.fitted, y=.resid)) + geom_point()
+```
+
+![](L6_DOE_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+
+## ANOVA - Computing formulas
+
+
+`$$SS_T = \sum_{i=1}^{a}\sum_{j=1}^b y_{ij}^2 - \frac{y_{..}^2}{N}$$`
+`$$SS_{Treatments} = \frac{1}{b}\sum_{i=1}^a y_{i.}^2 - \frac{y_{..}^2}{N}$$`
+
+`$$SS_{Blocks} = \frac{1}{a}\sum_{i=j=1}^b y_{.j}^2 - \frac{y_{..}^2}{N}$$`
+
+`$$SS_{E} = SS_{T} - SS_{Treatments} - SS_{Blocks}$$`
+
+---
+
+## Expected value of mean squares, if treatments and blocks are fixed
+
+`$$E(MS_{Treatments}) = \sigma^2 + \frac{b\sum_{i=1}^a \tau_i^2}{a-1}$$`
+
+
+`$$E(MS_{Blocks}) = \sigma^2 + \frac{a\sum_{j=1}^b \beta_j^2}{b-1}$$`
+
+$$E(MS_{E}) = \sigma^2 $$
+
+
+---
+
+
+
+### Test the equality of treatment means
+
+`$$F_0 = \frac{MS_{Treatments}}{MS_E}$$`
+which is distributed as `\(F_{a-1, (a-1)(b-1)}\)`
+
+
+
+### Comparing block treatment means
+
+`$$F_0 = \frac{MS_{Blocks}}{MS_E}$$`
+which is distributed as `\(F_{b-1, (a-1)(b-1)}\)`
+
+
+
+
+---
+
+## RCBD - Multiple Comparisons
+
+- The rejection of the null hypothesis indicates a significant difference in
+treatment means. 
+
+- Any of the multiple comparison methods can be used
+for detecting which means are significantly different. In this course we use, Tukey's
+method can be used. 
+
+- In general we are not interested to compare block
+means.
+
+---
+
+
+.pull-left[
+
+```r
+TukeyHSD(two.way,  "tip")
+```
+
+```
+  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = value ~ tip + Block, data = df.pl)
+
+$tip
+      diff         lwr        upr     p adj
+2-1  0.025 -0.18311992 0.23311992 0.9809005
+3-1 -0.125 -0.33311992 0.08311992 0.3027563
+4-1  0.300  0.09188008 0.50811992 0.0066583
+3-2 -0.150 -0.35811992 0.05811992 0.1815907
+4-2  0.275  0.06688008 0.48311992 0.0113284
+4-3  0.425  0.21688008 0.63311992 0.0006061
+```
+
+]
+
+.pull-right[
+
+```r
+plot(TukeyHSD(two.way,  "tip"))
+```
+
+![](L6_DOE_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+## Randomized Incomplete Block Designs
+
+Every treatment is not present in every block
+
+## Balanced Incomplete Block Design (BIBD)
+
+All pairs of treatments occur together within a block an equal number of times
+
 
 ---
 
