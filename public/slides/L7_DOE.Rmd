@@ -1,0 +1,515 @@
+---
+title: "STA 225 2.0 Design and Analysis of Experiments"
+subtitle: "Lecture 10"
+author: "Dr Thiyanga S. Talagala"
+date: "2022-03-04"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - default
+      - default-fonts
+      - duke-blue
+      - hygge-duke
+      - libs/cc-fonts.css
+      - libs/figure-captions.css
+      - xaringan-themer.css
+      - custom.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#081d58",
+  secondary_color = "#FF961C",
+ inverse_header_color = "#FFFFFF",
+ title_slide_text_color = "#edf8b1",
+ link_color =  "#41b6c4"
+)
+#style_solarized_light(text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"))
+#style_mono_light(
+#  base_color = "#1c5253",
+#  header_font_google = google_font("Josefin Sans"),
+#  text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"),
+#  code_font_google   = google_font("Fira Mono")
+#)
+```
+
+<style>
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+</style>
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 27px;
+}
+</style>
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, warnings=FALSE, message=FALSE)
+```
+
+## Recap
+
+**Nuisance factor:** a factor that has some effect on the response, but is of no interest to the experimenter
+ 
+ 
+**Blocking:** technique for dealing with nuisance factors
+
+---
+background-image: url('input2.png')
+background-position: center
+background-size: contain
+
+---
+
+- **nuisance factor that is known but uncontrollable and measurable**: measure and remove the effect of the nuisance factor from the analysis by using analysis of covariance 
+
+- **nuisance factors that are unknown and uncontrollable (sometimes called a “lurking” variable) not measurable**: randomization to balance out their impact
+
+- **nuisance variable is known and controllable**: blocking and control it by including a blocking factor in our experiment analysis.
+
+---
+## Blocking
+
+- a set of homogeneous plots or a set of similar experimental units
+
+- Eg: contiguous plots of land under the assumption that fertility, moisture, weather. 
+
+---
+
+## The Latin Square Design
+
+- Allows blocking in two directions
+
+- Simultaneously control (or eliminate) two sources of nuisance variability
+
+-  Assumption is that the three factors (treatments, nuisance
+factors) do not interact
+
+## Example
+
+Response: yield
+
+Two source of variability: Slope and Shading
+
+- Block on two (perpendicular) sources of variation ($rows \times columns$) 
+
+
+---
+
+## In class-demo
+
+---
+## The Rocket Propellant Problem – A Latin Square Design
+
+"Suppose that an experimenter is studying the effects of five
+different formulations of a rocket propellant used in aircrew
+escape systems on the observed burning rate. Each
+formulation is mixed from a batch of raw material that only
+large enough for five formulations to be tested.
+Furthermore, the formulations are prepared by several
+operators, and there may be substantial differences in the
+skills and experience of the operators." 
+
+source: Montgomery, D. C. (2017). Design and analysis of experiments. John wiley & sons.
+
+---
+
+## The Rocket Propellant Problem – A Latin Square Design
+
+Two nuisance factors: batches of raw material and operators
+
+**Latin Square Design for the Rocket Propellant Problem**
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax" rowspan="2">Batches of Raw Material - Row Factor </th>
+    <th class="tg-0lax" colspan="5">Operator - Column Factor</th>
+  </tr>
+  <tr>
+    <th class="tg-0lax">1</th>
+    <th class="tg-0lax">2</th>
+    <th class="tg-0lax">3</th>
+    <th class="tg-0lax">4</th>
+    <th class="tg-0lax">5</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">A=24</td>
+    <td class="tg-0lax">B=20</td>
+    <td class="tg-0lax">C=19</td>
+    <td class="tg-0lax">D=24</td>
+    <td class="tg-0lax">E=24</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">2</td>
+    <td class="tg-0lax">B=17</td>
+    <td class="tg-0lax">C=24</td>
+    <td class="tg-0lax">D=30</td>
+    <td class="tg-0lax">E=27</td>
+    <td class="tg-0lax">A=36</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">C=18</td>
+    <td class="tg-0lax">D=38</td>
+    <td class="tg-0lax">E=26</td>
+    <td class="tg-0lax">A=27</td>
+    <td class="tg-0lax">B=21</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">D=26</td>
+    <td class="tg-0lax">E=31</td>
+    <td class="tg-0lax">A=26</td>
+    <td class="tg-0lax">B=23</td>
+    <td class="tg-0lax">C=22</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">E=22</td>
+    <td class="tg-0lax">A=30</td>
+    <td class="tg-0lax">B=20</td>
+    <td class="tg-0lax">C=29</td>
+    <td class="tg-0lax">D=31</td>
+  </tr>
+</tbody>
+</table>
+
+
+---
+
+## The Latin Square Design
+
+- Square with Latin letters to correspond to the treatments
+
+- The number of rows and columns correspond to the number of treatment levels
+
+- If we have $p$ treatments then we need to have $p$ rows and $p$ columns in order to create a $p \times p$ Latin square
+
+- The total number of plots is the square of the number of treatments
+
+- Each treatment appears once and only once in each row and column
+
+---
+
+## Examples of Latin Squares
+
+.pull-left[
+
+$4 \times 4$
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">A</th>
+    <th class="tg-0lax">B</th>
+    <th class="tg-0lax">D</th>
+    <th class="tg-0lax">C</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">B</td>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">A</td>
+    <td class="tg-0lax">D</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">D</td>
+    <td class="tg-0lax">B</td>
+    <td class="tg-0lax">A</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">D</td>
+    <td class="tg-0lax">A</td>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">B</td>
+  </tr>
+</tbody>
+</table>
+]
+
+.pull-right[
+
+$5 \times 5$
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax">A</th>
+    <th class="tg-0lax">D</th>
+    <th class="tg-0lax">B</th>
+    <th class="tg-0lax">E</th>
+    <th class="tg-0lax">C</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">D</td>
+    <td class="tg-0lax">A</td>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">B</td>
+    <td class="tg-0lax">E</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">B</td>
+    <td class="tg-0lax">E</td>
+    <td class="tg-0lax">D</td>
+    <td class="tg-0lax">A</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">B</td>
+    <td class="tg-0lax">E</td>
+    <td class="tg-0lax">A</td>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">D</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">E</td>
+    <td class="tg-0lax">C</td>
+    <td class="tg-0lax">D</td>
+    <td class="tg-0lax">A</td>
+    <td class="tg-0lax">B</td>
+  </tr>
+</tbody>
+</table> 
+
+
+]
+
+
+
+**Standard Latin square:** first row and column consists of the letters written in alphabetical order and then writing each successive row as the row of letters just above shifted one place to the left.
+
+> Your turn: In-class question
+
+---
+## Statistical Model for a Latin Square
+
+$$y_{ijk}=\mu + \alpha_i + \tau_i+\beta_k + \epsilon_{ijk}$$
+
+where $$i=1, 2, ...., p$$
+$$j=1, 2, ...., p$$
+$$k=1, 2, ...., p$$
+$y_{ijk}$ - observation in the $i$th row and $k$th column for the $j$th treatment
+
+This is an **effect model**.
+
+The model is completely **additive**: there is no interaction between rows, columns and treatments.
+
+---
+.pull-left[
+cont.
+
+$\mu$ - overall mean
+
+$\alpha_i$ - $i$th row effect
+
+$\tau_i$ - $j$th treatment effect
+
+
+$\beta_k$ - $k$th column effect
+
+$\epsilon_{ijk}$ - random error
+
+]
+
+.pull-right[
+
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax" rowspan="2">Batches of Raw Material - Row Factor </th>
+    <th class="tg-0lax" colspan="5">Operator - Column Factor</th>
+  </tr>
+  <tr>
+    <th class="tg-0lax">1</th>
+    <th class="tg-0lax">2</th>
+    <th class="tg-0lax">3</th>
+    <th class="tg-0lax">4</th>
+    <th class="tg-0lax">5</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">A=24</td>
+    <td class="tg-0lax">B=20</td>
+    <td class="tg-0lax">C=19</td>
+    <td class="tg-0lax">D=24</td>
+    <td class="tg-0lax">E=24</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">2</td>
+    <td class="tg-0lax">B=17</td>
+    <td class="tg-0lax">C=24</td>
+    <td class="tg-0lax">D=30</td>
+    <td class="tg-0lax">E=27</td>
+    <td class="tg-0lax">A=36</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">3</td>
+    <td class="tg-0lax">C=18</td>
+    <td class="tg-0lax">D=38</td>
+    <td class="tg-0lax">E=26</td>
+    <td class="tg-0lax">A=27</td>
+    <td class="tg-0lax">B=21</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">4</td>
+    <td class="tg-0lax">D=26</td>
+    <td class="tg-0lax">E=31</td>
+    <td class="tg-0lax">A=26</td>
+    <td class="tg-0lax">B=23</td>
+    <td class="tg-0lax">C=22</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">E=22</td>
+    <td class="tg-0lax">A=30</td>
+    <td class="tg-0lax">B=20</td>
+    <td class="tg-0lax">C=29</td>
+    <td class="tg-0lax">D=31</td>
+  </tr>
+</tbody>
+</table>
+
+$i=2$, $k=3$, give $j=4$ (formulation D)
+
+There is only one observation in each cell, only two of the three subscripts $i, j,$ and $k$ are needed to denote a particular observation. That is why there is no interaction between rows, columns, and treatments.
+
+]
+
+---
+## ANOVA
+
+$SS_T = SS_{Row} + SS_{Column} + SS_{Treatments} + SS_E$
+
+Respective degrees of freedom
+
+$$p^2 - 1 = p-1+p-1+p-1+(p-2)(p-1)$$
+
+Total number of observation
+
+$N = p^2$
+
+Assumption
+
+$\epsilon_{ijk}$ is $NID(0, \sigma^2)$
+
+---
+## ANOVA
+
+
+Source of variation |  Sum of squares (SS) | DF| Mean Square (MS) | F| p-value |
+---:---:---:---:---:---|
+Treatments |  $SS_{Treatments}$ | $p-1$ | $MS_{Treatments}$ | $F_0=\frac{MS_{Treatments}}{MS_E}$ | $P(F \geq F_0)$|
+Rows |  $SS_{Rows}$ | $p-1$ | $MS_{Rows}$ |  | |
+Columns |  $SS_{Columns}$ | $p-1$ | $MS_{Columns}$ |  | |
+Error  | $SS_E$ | $(p-2)(p-1)$ | $MS_{E}$ | |
+Total |  $SS_T$ | $N-1$| | | |
+
+$N=p^2$
+
+---
+## In-class
+
+$$SS_{Treatments}$$
+---
+## In-class
+
+$$SS_{Rows}$$
+---
+## In-class
+
+$$SS_{Columns}$$
+
+---
+
+## In-class
+
+$$SS_{E}$$
+
+---
+## In-class
+
+$$SS_{T}$$
+
+---
+## Advantages and Disadvantages
+
+### Advantages
+
+- Can control variability due to known and controllable two nuisance variables
+
+### Disadvantages
+
+- The experiment becomes very large if the number of treatments is large
+
+- Analysis is complicated when there are missing values and misassigned treatments
+
+- Error df is small if there are only a few treatments
+
+
+
+---
+
+## Acknowledgement
+
+Some of the slide content is based on
+
+Montgomery, D. C. (2017). Design and analysis of experiments. John wiley & sons.
+
+

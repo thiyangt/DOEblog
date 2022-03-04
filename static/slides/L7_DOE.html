@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 225 2.0 Design and Analysis of Experiments</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr Thiyanga S. Talagala" />
+    <meta name="date" content="2022-03-04" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/duke-blue.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge-duke.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs/cc-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="libs/figure-captions.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 225 2.0 Design and Analysis of Experiments
+## Lecture 10
+### Dr Thiyanga S. Talagala
+### 2022-03-04
+
+---
+
+
+
+&lt;style&gt;
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 27px;
+}
+&lt;/style&gt;
+
+
+## Recap
+
+**Nuisance factor:** a factor that has some effect on the response, but is of no interest to the experimenter
+ 
+ 
+**Blocking:** technique for dealing with nuisance factors
+
+---
+background-image: url('input2.png')
+background-position: center
+background-size: contain
+
+---
+
+- **nuisance factor that is known but uncontrollable and measurable**: measure and remove the effect of the nuisance factor from the analysis by using analysis of covariance 
+
+- **nuisance factors that are unknown and uncontrollable (sometimes called a “lurking” variable) not measurable**: randomization to balance out their impact
+
+- **nuisance variable is known and controllable**: blocking and control it by including a blocking factor in our experiment analysis.
+
+---
+## Blocking
+
+- a set of homogeneous plots or a set of similar experimental units
+
+- Eg: contiguous plots of land under the assumption that fertility, moisture, weather. 
+
+---
+
+## The Latin Square Design
+
+- Allows blocking in two directions
+
+- Simultaneously control (or eliminate) two sources of nuisance variability
+
+-  Assumption is that the three factors (treatments, nuisance
+factors) do not interact
+
+## Example
+
+Response: yield
+
+Two source of variability: Slope and Shading
+
+- Block on two (perpendicular) sources of variation ($rows \times columns$) 
+
+
+---
+
+## In class-demo
+
+---
+## The Rocket Propellant Problem – A Latin Square Design
+
+"Suppose that an experimenter is studying the effects of five
+different formulations of a rocket propellant used in aircrew
+escape systems on the observed burning rate. Each
+formulation is mixed from a batch of raw material that only
+large enough for five formulations to be tested.
+Furthermore, the formulations are prepared by several
+operators, and there may be substantial differences in the
+skills and experience of the operators." 
+
+source: Montgomery, D. C. (2017). Design and analysis of experiments. John wiley &amp; sons.
+
+---
+
+## The Rocket Propellant Problem – A Latin Square Design
+
+Two nuisance factors: batches of raw material and operators
+
+**Latin Square Design for the Rocket Propellant Problem**
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax" rowspan="2"&gt;Batches of Raw Material - Row Factor &lt;/th&gt;
+    &lt;th class="tg-0lax" colspan="5"&gt;Operator - Column Factor&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;1&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;2&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;3&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;4&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;5&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;1&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=24&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=20&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=19&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=24&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=24&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;2&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=17&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=24&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=30&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=36&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=18&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=38&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=26&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=21&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=26&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=31&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=26&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=23&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=22&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=22&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=30&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=20&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=29&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=31&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+
+## The Latin Square Design
+
+- Square with Latin letters to correspond to the treatments
+
+- The number of rows and columns correspond to the number of treatment levels
+
+- If we have `\(p\)` treatments then we need to have `\(p\)` rows and `\(p\)` columns in order to create a `\(p \times p\)` Latin square
+
+- The total number of plots is the square of the number of treatments
+
+- Each treatment appears once and only once in each row and column
+
+---
+
+## Examples of Latin Squares
+
+.pull-left[
+
+`\(4 \times 4\)`
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;A&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;B&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;D&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;C&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+.pull-right[
+
+`\(5 \times 5\)`
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;A&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;D&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;B&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;E&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;C&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;E&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt; 
+
+
+]
+
+
+
+**Standard Latin square:** first row and column consists of the letters written in alphabetical order and then writing each successive row as the row of letters just above shifted one place to the left.
+
+&gt; Your turn: In-class question
+
+---
+## Statistical Model for a Latin Square
+
+`$$y_{ijk}=\mu + \alpha_i + \tau_i+\beta_k + \epsilon_{ijk}$$`
+
+where `$$i=1, 2, ...., p$$`
+`$$j=1, 2, ...., p$$`
+`$$k=1, 2, ...., p$$`
+`\(y_{ijk}\)` - observation in the `\(i\)`th row and `\(k\)`th column for the `\(j\)`th treatment
+
+This is an **effect model**.
+
+The model is completely **additive**: there is no interaction between rows, columns and treatments.
+
+---
+.pull-left[
+cont.
+
+`\(\mu\)` - overall mean
+
+`\(\alpha_i\)` - `\(i\)`th row effect
+
+`\(\tau_i\)` - `\(j\)`th treatment effect
+
+
+`\(\beta_k\)` - `\(k\)`th column effect
+
+`\(\epsilon_{ijk}\)` - random error
+
+]
+
+.pull-right[
+
+
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax" rowspan="2"&gt;Batches of Raw Material - Row Factor &lt;/th&gt;
+    &lt;th class="tg-0lax" colspan="5"&gt;Operator - Column Factor&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;1&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;2&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;3&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;4&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;5&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;1&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=24&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=20&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=19&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=24&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=24&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;2&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=17&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=24&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=30&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=36&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;3&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=18&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=38&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=26&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=27&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=21&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;4&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=26&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=31&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=26&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=23&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=22&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;5&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;E=22&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;A=30&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;B=20&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;C=29&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;D=31&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+`\(i=2\)`, `\(k=3\)`, give `\(j=4\)` (formulation D)
+
+There is only one observation in each cell, only two of the three subscripts `\(i, j,\)` and `\(k\)` are needed to denote a particular observation. That is why there is no interaction between rows, columns, and treatments.
+
+]
+
+---
+## ANOVA
+
+`\(SS_T = SS_{Row} + SS_{Column} + SS_{Treatments} + SS_E\)`
+
+Respective degrees of freedom
+
+`$$p^2 - 1 = p-1+p-1+p-1+(p-2)(p-1)$$`
+
+Total number of observation
+
+`\(N = p^2\)`
+
+Assumption
+
+`\(\epsilon_{ijk}\)` is `\(NID(0, \sigma^2)\)`
+
+---
+## ANOVA
+
+
+Source of variation |  Sum of squares (SS) | DF| Mean Square (MS) | F| p-value |
+---:---:---:---:---:---|
+Treatments |  `\(SS_{Treatments}\)` | `\(p-1\)` | `\(MS_{Treatments}\)` | `\(F_0=\frac{MS_{Treatments}}{MS_E}\)` | `\(P(F \geq F_0)\)`|
+Rows |  `\(SS_{Rows}\)` | `\(p-1\)` | `\(MS_{Rows}\)` |  | |
+Columns |  `\(SS_{Columns}\)` | `\(p-1\)` | `\(MS_{Columns}\)` |  | |
+Error  | `\(SS_E\)` | `\((p-2)(p-1)\)` | `\(MS_{E}\)` | |
+Total |  `\(SS_T\)` | `\(N-1\)`| | | |
+
+`\(N=p^2\)`
+
+---
+## In-class
+
+`$$SS_{Treatments}$$`
+---
+## In-class
+
+`$$SS_{Rows}$$`
+---
+## In-class
+
+`$$SS_{Columns}$$`
+
+---
+
+## In-class
+
+`$$SS_{E}$$`
+
+---
+## In-class
+
+`$$SS_{T}$$`
+
+---
+## Advantages and Disadvantages
+
+### Advantages
+
+- Can control variability due to known and controllable two nuisance variables
+
+### Disadvantages
+
+- The experiment becomes very large if the number of treatments is large
+
+- Analysis is complicated when there are missing values and misassigned treatments
+
+- Error df is small if there are only a few treatments
+
+
+
+---
+
+## Acknowledgement
+
+Some of the slide content is based on
+
+Montgomery, D. C. (2017). Design and analysis of experiments. John wiley &amp; sons.
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
