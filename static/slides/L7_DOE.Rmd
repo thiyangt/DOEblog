@@ -467,10 +467,47 @@ $N=p^2$
 ## In-class
 
 $$SS_{Treatments}$$
+
+---
+$$SS_{Treatments}$$
+
+$$SS_{Formulation}$$
+```{r}
+a <- c(24, 17, 18, 26, 22, 20, 24, 38, 31, 30, 19, 30, 26, 26, 20, 24, 27, 27, 23, 29, 24, 36, 21, 22, 31)
+A <- c(24, 30, 26, 27, 36)
+B <- c(17, 20, 20, 23, 21)
+C <- c(18, 24, 19, 29, 22)
+D <- c(26, 38, 30, 24, 31)
+E <- c(22, 31, 26, 27, 24)
+mat1 <- matrix(c(A, B, C, D, E), ncol=5, byrow = TRUE)
+rowSums(mat1)
+(sum(rowSums(mat1)^2)/5) - (sum(a)^2/25)
+```
+
+---
+$$SS_{Total}$$
+
+```{r, comment=NA}
+a <- c(24, 17, 18, 26, 22, 20, 24, 38, 31, 30, 19, 30, 26, 26, 20, 24, 27, 27, 23, 29, 24, 36, 21, 22, 31)
+
+sum(a^2) - (sum(a)^2/25)
+```
+
 ---
 ## In-class
 
 $$SS_{Rows}$$
+
+---
+$$SS_{Rows}$$
+$$SS_{Batches}$$
+```{r}
+mat <- matrix(a, ncol=5)
+rowSums(mat)
+colSums(mat)
+
+sum(rowSums(mat)^2)/5 - (sum(a)^2/25)
+```
 ---
 ## In-class
 
