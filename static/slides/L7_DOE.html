@@ -119,6 +119,8 @@ source: Montgomery, D. C. (2017). Design and analysis of experiments. John wiley
 
 Two nuisance factors: batches of raw material and operators
 
+Response variable: burning rate
+
 **Latin Square Design for the Rocket Propellant Problem**
 
 &lt;style type="text/css"&gt;
@@ -453,7 +455,63 @@ Total |  `\(SS_T\)` | `\(N-1\)`| | | |
 ---
 ## In-class
 
-`$$SS_{Treatments}$$`
+`$$SS_{Treatments} = \frac{1}{p}\sum_{j=1}^{p}y^2_{.j.} - \frac{y^2_{...}}{N}$$`
+
+
+.pull-left[
+
+`$$A 	\rightarrow y_{.1.}$$`
+
+`$$B 	\rightarrow y_{.2.}$$`
+
+`$$C 	\rightarrow y_{.3.}$$`
+
+`$$D 	\rightarrow y_{.4.}$$`
+`$$E 	\rightarrow y_{.5.}$$`
+
+]
+
+.pull-right[
+&lt;style type="text/css"&gt;
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+&lt;/style&gt;
+&lt;table class="tg"&gt;
+&lt;thead&gt;
+  &lt;tr&gt;
+    &lt;th class="tg-0lax"&gt;Latin letter&lt;/th&gt;
+    &lt;th class="tg-0lax"&gt;Treatment total&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;A&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;B&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;C&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;D&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td class="tg-0lax"&gt;E&lt;/td&gt;
+    &lt;td class="tg-0lax"&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
 
 ---
 `$$SS_{Treatments}$$`
@@ -483,6 +541,13 @@ rowSums(mat1)
 ## [1] 330
 ```
 
+
+---
+## In-class
+
+`$$SS_{T}$$`
+`$$SS_{T} = \sum_i\sum_j\sum_ky^2_{ijk} - \frac{y^2_{...}}{N}$$`
+
 ---
 `$$SS_{Total}$$`
 
@@ -500,7 +565,7 @@ sum(a^2) - (sum(a)^2/25)
 ---
 ## In-class
 
-`$$SS_{Rows}$$`
+`$$SS_{Rows} = \frac{1}{p}\sum_{i=1}^py^2_{i..}-\frac{y^2_{...}}{N}$$`
 
 ---
 `$$SS_{Rows}$$`
@@ -533,18 +598,25 @@ sum(rowSums(mat)^2)/5 - (sum(a)^2/25)
 ---
 ## In-class
 
-`$$SS_{Columns}$$`
+`$$SS_{Columns} = \frac{1}{p}\sum_{k=1}^py^2_{..k}-\frac{y^2_{...}}{N}$$`
 
 ---
 
 ## In-class
 
-`$$SS_{E}$$`
+`$$SS_{E}$$` (by substraction)
+
 
 ---
-## In-class
+# In-class
 
-`$$SS_{T}$$`
+## ANOVA: Rocket Propellant Problem
+
+---
+# In-class
+
+Conclusions: 
+
 
 ---
 ## Advantages and Disadvantages
