@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>STA 225 2.0 Design and Analysis of Experiments</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Dr Thiyanga S. Talagala" />
+    <meta name="date" content="2022-03-08" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/duke-blue.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge-duke.css" rel="stylesheet" />
+    <link rel="stylesheet" href="libs/cc-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="libs/figure-captions.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# STA 225 2.0 Design and Analysis of Experiments
+## Lecture 11
+### Dr Thiyanga S. Talagala
+### 2022-03-08
+
+---
+
+
+
+&lt;style&gt;
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+&lt;/style&gt;
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 27px;
+}
+&lt;/style&gt;
+
+
+## Factorial Design
+
+- CRD, RCBD, LSD: deal with one factor, hence we called them "simple experiments".
+
+- Useful in experimental situations which involve the study of the effect of two or more factors.
+
+
+
+- **Factorial**: the effect of several factors are studied simultaneously
+
+- Treatments: All combinations of the different factor levels 
+
+---
+
+## Main effect
+
+- Change in response produced by a change in the level of the factor
+
+.pull-left[
+**In-class**
+
+]
+
+.pull-right[
+
+Figure: A factorial experiment without interaction
+
+
+]
+
+---
+
+## Interaction effect
+
+
+.pull-left[
+
+**In-class**
+
+]
+
+.pull-right[
+
+Figure: A factorial experiment with interaction
+
+
+]
+
+---
+
+## The two-factor factorial design
+
+**Life (in hours) Data for the Battery Design Example** (Montgomery, 2004)
+
+
+```r
+library(tidyverse)
+material_type &lt;- factor(rep(1:3, each=12))
+temperature &lt;- factor(rep(c(15, 70, 125), each=4, times = 3))
+life &lt;- c(130, 155, 74, 180, 34, 40, 80, 75, 20, 70, 82, 58, 150, 188, 159, 126, 136, 122, 106, 115, 25, 70, 58, 45, 138, 110, 168, 160, 174, 120, 150, 139, 96, 104, 82, 60)
+data &lt;- tibble(material = material_type,
+               temperature = temperature,
+               life = life)
+data
+```
+
+```
+# A tibble: 36 × 3
+   material temperature  life
+   &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;
+ 1 1        15            130
+ 2 1        15            155
+ 3 1        15             74
+ 4 1        15            180
+ 5 1        70             34
+ 6 1        70             40
+ 7 1        70             80
+ 8 1        70             75
+ 9 1        125            20
+10 1        125            70
+# … with 26 more rows
+```
+
+
+---
+
+## Data arrangement
+
+In-class
+
+
+---
+
+# Possible questions
+
+- What effect do material type and temperature have on the life of the battery?
+
+- Robust product design: Is there a choice of material that would give uniformly long life regardless of temperature (material that is not greatly affected by temperature)?
+
+---
+
+## General arrangement for a two-factorial factor design
+
+---
+
+## The effect model
+
+&gt; In class
+
+---
+
+## The mean model
+
+&gt; In class
+
+---
+## Testing hypotheses
+
+1. equality of row treatment effect
+
+&gt; in-class
+
+2. equality of column treatment effect
+
+&gt; in-class
+
+3. equality of row and column treatments interact
+
+&gt; in-class
+
+---
+
+## Total of observations and grand mean
+
+.pull-left[
+
+### Total
+
+`$$y_{...}$$`
+
+]
+
+
+.pull-right[
+
+### Mean
+
+`$$\bar{y}_{...}$$`
+
+]
+
+
+
+---
+
+.pull-left[
+### Total of observations under the `\(i\)`th level of factor A
+
+`$$y_{i..}$$`
+
+
+]
+
+.pull-right[
+
+### Mean
+
+`$$\bar{y}_{i..} = \frac{y_{i..}}{bn}$$`
+
+]
+
+---
+
+.pull-left[
+### Total of observations under the `\(j\)`th level of factor B
+
+`$$y_{.j.}$$`
+
+
+]
+
+.pull-right[
+
+### Mean
+
+`$$\bar{y}_{.j.} = \frac{y_{.j.}}{an}$$`
+
+]
+
+---
+
+.pull-left[
+
+### Total of all observations in the `\(ij\)`th cell
+
+`$$y_{ij.}$$`
+
+]
+
+
+.pull-right[
+
+### Mean
+
+`$$\bar{y}_{ij.}$$`
+
+]
+
+---
+## Total sum of squares
+
+`$$\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n (y_{ijk} - \bar{y}_{...})^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n[(\bar{y}_{i..}-\bar{y}_{...}) + (\bar{y}_{.j.} - \bar{y}_{...}) + (\bar{y}_{ij.} - \bar{y}_{i..} - \bar{y}_{.j.}+\bar{y}_{...}) + (y_{ijk} - \bar{y}_{ij.})]^2$$`
+
+Show that
+
+`$$SS_T = SS_A + SS_B + SS_{AB} + SS_{E}$$`
+
+---
+
+## Degrees of freedom associated with sum of squares
+
+&gt; In class
+
+
+---
+
+## ANOVA table
+
+&gt; In class
+
+---
+## EDA
+
+.pull-left[
+
+
+```r
+ggplot(data, aes(x=material, y=life, col=material)) + geom_boxplot() + geom_jitter()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+
+```r
+ggplot(data, aes(x=temperature, y=life, col=temperature)) + geom_boxplot() + geom_jitter()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+]
+
+---
+
+
+```r
+data %&gt;% group_by(temperature) %&gt;%
+  summarize(mean = mean(life), sd=sd(life))
+```
+
+```
+## # A tibble: 3 × 3
+##   temperature  mean    sd
+##   &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 15          145.   31.7
+## 2 70          108.   42.9
+## 3 125          64.2  25.7
+```
+
+```r
+data %&gt;% group_by(material) %&gt;%
+  summarize(mean = mean(life), sd=sd(life))
+```
+
+```
+## # A tibble: 3 × 3
+##   material  mean    sd
+##   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;
+## 1 1         83.2  48.6
+## 2 2        108.   49.5
+## 3 3        125.   35.8
+```
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

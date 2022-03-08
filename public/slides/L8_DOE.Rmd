@@ -1,0 +1,306 @@
+---
+title: "STA 225 2.0 Design and Analysis of Experiments"
+subtitle: "Lecture 11"
+author: "Dr Thiyanga S. Talagala"
+date: "2022-03-08"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: 
+      - default
+      - default-fonts
+      - duke-blue
+      - hygge-duke
+      - libs/cc-fonts.css
+      - libs/figure-captions.css
+      - xaringan-themer.css
+      - custom.css
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#081d58",
+  secondary_color = "#FF961C",
+ inverse_header_color = "#FFFFFF",
+ title_slide_text_color = "#edf8b1",
+ link_color =  "#41b6c4"
+)
+#style_solarized_light(text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"))
+#style_mono_light(
+#  base_color = "#1c5253",
+#  header_font_google = google_font("Josefin Sans"),
+#  text_font_google   = google_font("Josefin Sans", "400", "400i", "800i", "800"),
+#  code_font_google   = google_font("Fira Mono")
+#)
+```
+
+<style>
+
+.center2 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+</style>
+
+<style type="text/css">
+.remark-slide-content {
+    font-size: 27px;
+}
+</style>
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE, warnings=FALSE, message=FALSE)
+```
+
+## Factorial Design
+
+- CRD, RCBD, LSD: deal with one factor, hence we called them "simple experiments".
+
+- Useful in experimental situations which involve the study of the effect of two or more factors.
+
+
+
+- **Factorial**: the effect of several factors are studied simultaneously
+
+- Treatments: All combinations of the different factor levels 
+
+---
+
+## Main effect
+
+- Change in response produced by a change in the level of the factor
+
+.pull-left[
+**In-class**
+
+]
+
+.pull-right[
+
+Figure: A factorial experiment without interaction
+
+
+]
+
+---
+
+## Interaction effect
+
+
+.pull-left[
+
+**In-class**
+
+]
+
+.pull-right[
+
+Figure: A factorial experiment with interaction
+
+
+]
+
+---
+
+## The two-factor factorial design
+
+**Life (in hours) Data for the Battery Design Example** (Montgomery, 2004)
+
+```{r, comment=NA, message=FALSE, warning=FALSE}
+library(tidyverse)
+material_type <- factor(rep(1:3, each=12))
+temperature <- factor(rep(c(15, 70, 125), each=4, times = 3))
+life <- c(130, 155, 74, 180, 34, 40, 80, 75, 20, 70, 82, 58, 150, 188, 159, 126, 136, 122, 106, 115, 25, 70, 58, 45, 138, 110, 168, 160, 174, 120, 150, 139, 96, 104, 82, 60)
+data <- tibble(material = material_type,
+               temperature = temperature,
+               life = life)
+data
+```
+
+
+---
+
+## Data arrangement
+
+In-class
+
+
+---
+
+# Possible questions
+
+- What effect do material type and temperature have on the life of the battery?
+
+- Robust product design: Is there a choice of material that would give uniformly long life regardless of temperature (material that is not greatly affected by temperature)?
+
+---
+
+## General arrangement for a two-factorial factor design
+
+---
+
+## The effect model
+
+> In class
+
+---
+
+## The mean model
+
+> In class
+
+---
+## Testing hypotheses
+
+1. equality of row treatment effect
+
+> in-class
+
+2. equality of column treatment effect
+
+> in-class
+
+3. equality of row and column treatments interact
+
+> in-class
+
+---
+
+## Total of observations and grand mean
+
+.pull-left[
+
+### Total
+
+$$y_{...}$$
+
+]
+
+
+.pull-right[
+
+### Mean
+
+$$\bar{y}_{...}$$
+
+]
+
+
+
+---
+
+.pull-left[
+### Total of observations under the $i$th level of factor A
+
+$$y_{i..}$$
+
+
+]
+
+.pull-right[
+
+### Mean
+
+$$\bar{y}_{i..} = \frac{y_{i..}}{bn}$$
+
+]
+
+---
+
+.pull-left[
+### Total of observations under the $j$th level of factor B
+
+$$y_{.j.}$$
+
+
+]
+
+.pull-right[
+
+### Mean
+
+$$\bar{y}_{.j.} = \frac{y_{.j.}}{an}$$
+
+]
+
+---
+
+.pull-left[
+
+### Total of all observations in the $ij$th cell
+
+$$y_{ij.}$$
+
+]
+
+
+.pull-right[
+
+### Mean
+
+$$\bar{y}_{ij.}$$
+
+]
+
+---
+## Total sum of squares
+
+$$\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n (y_{ijk} - \bar{y}_{...})^2=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n[(\bar{y}_{i..}-\bar{y}_{...}) + (\bar{y}_{.j.} - \bar{y}_{...}) + (\bar{y}_{ij.} - \bar{y}_{i..} - \bar{y}_{.j.}+\bar{y}_{...}) + (y_{ijk} - \bar{y}_{ij.})]^2$$
+
+Show that
+
+$$SS_T = SS_A + SS_B + SS_{AB} + SS_{E}$$
+
+---
+
+## Degrees of freedom associated with sum of squares
+
+> In class
+
+
+---
+
+## ANOVA table
+
+> In class
+
+---
+## EDA
+
+.pull-left[
+
+```{r, fig.height=4}
+ggplot(data, aes(x=material, y=life, col=material)) + geom_boxplot() + geom_jitter()
+
+```
+
+]
+
+.pull-right[
+
+```{r, fig.height=4}
+ggplot(data, aes(x=temperature, y=life, col=temperature)) + geom_boxplot() + geom_jitter()
+
+```
+
+]
+
+---
+
+```{r}
+data %>% group_by(temperature) %>%
+  summarize(mean = mean(life), sd=sd(life))
+
+data %>% group_by(material) %>%
+  summarize(mean = mean(life), sd=sd(life))
+```
+
