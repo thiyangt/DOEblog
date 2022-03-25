@@ -564,10 +564,128 @@ $$\bar{y}_{32.} = 145.75$$
 
 ]
 
+---
+
+## Example: 
+
+Does the effect of sunlight on plant growth depend on watering frequency?
+
+```{r, comment=NA, echo=FALSE}
+set.seed(30111985)
+
+#create data
+df <- data.frame(sunlight = factor(rep(c('Low', 'Medium', 'High'), each = 15, times = 2)),
+                 water = factor(rep(c('Daily', 'Weekly'), each = 45, times = 2)),
+                 growth = c(rnorm(15, 9, 3), rnorm(15, 10, 3), rnorm(15, 13, 3),
+                            rnorm(15, 8, 3), rnorm(15, 10, 3), rnorm(15, 12, 3)))
+df
+```
+
+---
+
+## Descriptive Statistics
+
+```{r, comment=NA, message=FALSE}
+
+summary(df)
+
+```
+
+---
+
+```{r}
+t1 <- df %>% group_by(sunlight, water) %>% summarize(mean=mean(growth))
+t1
+```
+
+Draw the interaction plot and comment on it.
+
+---
+
+```{r}
+ggplot(t1, aes(x=sunlight, y=mean, group=water, col=water)) + geom_point() + geom_path()
+```
 
 
 ---
 
+```{r}
+fit2 <- lm(growth ~ sunlight + water + sunlight*water, data=df)
+anova(fit2)
+```
+
+---
+
+## Compute residuals and fitted values
+
+```{r}
+t2 <- broom::augment(fit2)
+t2
+```
+
+---
+## Normality plot of residuals
+
+.pull-left[
+```{r, fig.height=5}
+ggplot(t2, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+
+```
+
+]
+
+.pull-left[
+
+```{r}
+
+shapiro.test(t2$.resid)
+```
+
+]
+
+---
+
+## Residuals vs Fitted
+
+```{r}
+ggplot(t2, aes(x=.fitted, y=.resid)) + geom_point()
+
+```
+
+---
+
+## Plot of residuals vs water level
+
+```{r}
+ggplot(t2, aes(x=water, y=.resid)) + geom_point()
+```
+
+---
+## Plot of residuals vs sunlight
+
+```{r}
+ggplot(t2, aes(x=sunlight, y=.resid)) + geom_point()
+```
+
+
+---
+## Multiple comparison
+
+```{r}
+aov2.out <- aov(growth ~ sunlight * water, data=df)
+aov2.out
+```
+---
+
+## Multiple comparison
+
+```{r}
+TukeyHSD(aov2.out)
+```
+
+---
 ## Acknowledgement
 
 Content is based on "Design and Analysis of Experiments" by Douglas C. Montgomery

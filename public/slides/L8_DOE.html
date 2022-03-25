@@ -804,10 +804,436 @@ Three material (a=3) type at temperature 70
 
 ]
 
+---
+
+## Example: 
+
+Does the effect of sunlight on plant growth depend on watering frequency?
+
+
+```
+    sunlight  water    growth
+1        Low  Daily 11.602699
+2        Low  Daily  8.788627
+3        Low  Daily  2.837764
+4        Low  Daily 10.350109
+5        Low  Daily 10.586840
+6        Low  Daily 12.593023
+7        Low  Daily  2.374750
+8        Low  Daily 13.806439
+9        Low  Daily 11.880857
+10       Low  Daily 11.383926
+11       Low  Daily 13.296031
+12       Low  Daily  9.811383
+13       Low  Daily  6.083509
+14       Low  Daily  7.747825
+15       Low  Daily 11.848674
+16    Medium  Daily 12.278993
+17    Medium  Daily  6.422065
+18    Medium  Daily 14.956996
+19    Medium  Daily 13.302550
+20    Medium  Daily  5.539841
+21    Medium  Daily 18.543803
+22    Medium  Daily  8.814481
+23    Medium  Daily 14.133272
+24    Medium  Daily 12.973521
+25    Medium  Daily  8.668584
+26    Medium  Daily 13.666569
+27    Medium  Daily 10.272770
+28    Medium  Daily  5.935407
+29    Medium  Daily 14.202236
+30    Medium  Daily  7.311347
+31      High  Daily 12.455280
+32      High  Daily 12.702102
+33      High  Daily 18.179540
+34      High  Daily 13.348311
+35      High  Daily  9.569833
+36      High  Daily 13.940489
+37      High  Daily 11.590162
+38      High  Daily 11.754965
+39      High  Daily 11.656025
+40      High  Daily  9.090323
+41      High  Daily 11.408538
+42      High  Daily 10.225797
+43      High  Daily  9.035619
+44      High  Daily  7.874920
+45      High  Daily 16.295417
+46       Low Weekly  5.612127
+47       Low Weekly  2.796371
+48       Low Weekly  8.092031
+49       Low Weekly  7.682207
+50       Low Weekly  5.865978
+51       Low Weekly 10.495029
+52       Low Weekly  2.247268
+53       Low Weekly  6.211078
+54       Low Weekly  5.735937
+55       Low Weekly  8.557471
+56       Low Weekly  5.366155
+57       Low Weekly  8.859972
+58       Low Weekly  8.755086
+59       Low Weekly 11.031062
+60       Low Weekly  5.549028
+61    Medium Weekly 12.671094
+62    Medium Weekly 10.833332
+63    Medium Weekly 13.519200
+64    Medium Weekly 11.796179
+65    Medium Weekly  9.522459
+66    Medium Weekly  9.019963
+67    Medium Weekly  7.088617
+68    Medium Weekly 14.981191
+69    Medium Weekly  9.987386
+70    Medium Weekly  8.765056
+71    Medium Weekly  8.949763
+72    Medium Weekly 11.021614
+73    Medium Weekly 10.969631
+74    Medium Weekly  4.817212
+75    Medium Weekly  9.056691
+76      High Weekly 12.357894
+77      High Weekly  9.585223
+78      High Weekly  9.322410
+79      High Weekly 14.694987
+80      High Weekly 10.025044
+81      High Weekly  8.795878
+82      High Weekly  4.912749
+83      High Weekly 12.643520
+84      High Weekly  7.615474
+85      High Weekly 13.981438
+86      High Weekly 12.742762
+87      High Weekly  8.238243
+88      High Weekly 13.147403
+89      High Weekly  9.195736
+90      High Weekly 11.110050
+91       Low  Daily 11.602699
+92       Low  Daily  8.788627
+93       Low  Daily  2.837764
+94       Low  Daily 10.350109
+95       Low  Daily 10.586840
+96       Low  Daily 12.593023
+97       Low  Daily  2.374750
+98       Low  Daily 13.806439
+99       Low  Daily 11.880857
+100      Low  Daily 11.383926
+101      Low  Daily 13.296031
+102      Low  Daily  9.811383
+103      Low  Daily  6.083509
+104      Low  Daily  7.747825
+105      Low  Daily 11.848674
+106   Medium  Daily 12.278993
+107   Medium  Daily  6.422065
+108   Medium  Daily 14.956996
+109   Medium  Daily 13.302550
+110   Medium  Daily  5.539841
+111   Medium  Daily 18.543803
+112   Medium  Daily  8.814481
+113   Medium  Daily 14.133272
+114   Medium  Daily 12.973521
+115   Medium  Daily  8.668584
+116   Medium  Daily 13.666569
+117   Medium  Daily 10.272770
+118   Medium  Daily  5.935407
+119   Medium  Daily 14.202236
+120   Medium  Daily  7.311347
+121     High  Daily 12.455280
+122     High  Daily 12.702102
+123     High  Daily 18.179540
+124     High  Daily 13.348311
+125     High  Daily  9.569833
+126     High  Daily 13.940489
+127     High  Daily 11.590162
+128     High  Daily 11.754965
+129     High  Daily 11.656025
+130     High  Daily  9.090323
+131     High  Daily 11.408538
+132     High  Daily 10.225797
+133     High  Daily  9.035619
+134     High  Daily  7.874920
+135     High  Daily 16.295417
+136      Low Weekly  5.612127
+137      Low Weekly  2.796371
+138      Low Weekly  8.092031
+139      Low Weekly  7.682207
+140      Low Weekly  5.865978
+141      Low Weekly 10.495029
+142      Low Weekly  2.247268
+143      Low Weekly  6.211078
+144      Low Weekly  5.735937
+145      Low Weekly  8.557471
+146      Low Weekly  5.366155
+147      Low Weekly  8.859972
+148      Low Weekly  8.755086
+149      Low Weekly 11.031062
+150      Low Weekly  5.549028
+151   Medium Weekly 12.671094
+152   Medium Weekly 10.833332
+153   Medium Weekly 13.519200
+154   Medium Weekly 11.796179
+155   Medium Weekly  9.522459
+156   Medium Weekly  9.019963
+157   Medium Weekly  7.088617
+158   Medium Weekly 14.981191
+159   Medium Weekly  9.987386
+160   Medium Weekly  8.765056
+161   Medium Weekly  8.949763
+162   Medium Weekly 11.021614
+163   Medium Weekly 10.969631
+164   Medium Weekly  4.817212
+165   Medium Weekly  9.056691
+166     High Weekly 12.357894
+167     High Weekly  9.585223
+168     High Weekly  9.322410
+169     High Weekly 14.694987
+170     High Weekly 10.025044
+171     High Weekly  8.795878
+172     High Weekly  4.912749
+173     High Weekly 12.643520
+174     High Weekly  7.615474
+175     High Weekly 13.981438
+176     High Weekly 12.742762
+177     High Weekly  8.238243
+178     High Weekly 13.147403
+179     High Weekly  9.195736
+180     High Weekly 11.110050
+```
+
+---
+
+## Descriptive Statistics
+
+
+```r
+summary(df)
+```
+
+```
+   sunlight     water        growth      
+ High  :60   Daily :90   Min.   : 2.247  
+ Low   :60   Weekly:90   1st Qu.: 8.092  
+ Medium:60               Median :10.125  
+                         Mean   :10.060  
+                         3rd Qu.:12.593  
+                         Max.   :18.544  
+```
+
+---
+
+
+```r
+t1 &lt;- df %&gt;% group_by(sunlight, water) %&gt;% summarize(mean=mean(growth))
+```
+
+```
+## `summarise()` has grouped output by 'sunlight'. You can override using the
+## `.groups` argument.
+```
+
+```r
+t1
+```
+
+```
+## # A tibble: 6 × 3
+## # Groups:   sunlight [3]
+##   sunlight water   mean
+##   &lt;fct&gt;    &lt;fct&gt;  &lt;dbl&gt;
+## 1 High     Daily  11.9 
+## 2 High     Weekly 10.6 
+## 3 Low      Daily   9.67
+## 4 Low      Weekly  6.86
+## 5 Medium   Daily  11.1 
+## 6 Medium   Weekly 10.2
+```
+
+Draw the interaction plot and comment on it.
+
+---
+
+
+```r
+ggplot(t1, aes(x=sunlight, y=mean, group=water, col=water)) + geom_point() + geom_path()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
 
 
 ---
 
+
+```r
+fit2 &lt;- lm(growth ~ sunlight + water + sunlight*water, data=df)
+anova(fit2)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: growth
+##                 Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## sunlight         2  301.13 150.564 16.9591 1.867e-07 ***
+## water            1  131.47 131.472 14.8086 0.0001669 ***
+## sunlight:water   2   28.73  14.363  1.6178 0.2013041    
+## Residuals      174 1544.79   8.878                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
+## Compute residuals and fitted values
+
+
+```r
+t2 &lt;- broom::augment(fit2)
+t2
+```
+
+```
+## # A tibble: 180 × 9
+##    growth sunlight water .fitted .resid   .hat .sigma  .cooksd .std.resid
+##     &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##  1  11.6  Low      Daily    9.67  1.94  0.0333   2.98 0.00251       0.661
+##  2   8.79 Low      Daily    9.67 -0.878 0.0333   2.99 0.000516     -0.300
+##  3   2.84 Low      Daily    9.67 -6.83  0.0333   2.94 0.0312       -2.33 
+##  4  10.4  Low      Daily    9.67  0.684 0.0333   2.99 0.000313      0.233
+##  5  10.6  Low      Daily    9.67  0.921 0.0333   2.99 0.000568      0.314
+##  6  12.6  Low      Daily    9.67  2.93  0.0333   2.98 0.00574       0.999
+##  7   2.37 Low      Daily    9.67 -7.29  0.0333   2.93 0.0356       -2.49 
+##  8  13.8  Low      Daily    9.67  4.14  0.0333   2.97 0.0115        1.41 
+##  9  11.9  Low      Daily    9.67  2.21  0.0333   2.98 0.00328       0.756
+## 10  11.4  Low      Daily    9.67  1.72  0.0333   2.99 0.00198       0.586
+## # … with 170 more rows
+```
+
+---
+## Normality plot of residuals
+
+.pull-left[
+
+```r
+ggplot(t2, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-left[
+
+
+```r
+shapiro.test(t2$.resid)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  t2$.resid
+## W = 0.98796, p-value = 0.1292
+```
+
+]
+
+---
+
+## Residuals vs Fitted
+
+
+```r
+ggplot(t2, aes(x=.fitted, y=.resid)) + geom_point()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+
+---
+
+## Plot of residuals vs water level
+
+
+```r
+ggplot(t2, aes(x=water, y=.resid)) + geom_point()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+
+---
+## Plot of residuals vs sunlight
+
+
+```r
+ggplot(t2, aes(x=sunlight, y=.resid)) + geom_point()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+
+
+---
+## Multiple comparison
+
+
+```r
+aov2.out &lt;- aov(growth ~ sunlight * water, data=df)
+aov2.out
+```
+
+```
+## Call:
+##    aov(formula = growth ~ sunlight * water, data = df)
+## 
+## Terms:
+##                  sunlight     water sunlight:water Residuals
+## Sum of Squares   301.1287  131.4724        28.7260 1544.7911
+## Deg. of Freedom         2         1              2       174
+## 
+## Residual standard error: 2.979616
+## Estimated effects may be unbalanced
+```
+---
+
+## Multiple comparison
+
+
+```r
+TukeyHSD(aov2.out)
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = growth ~ sunlight * water, data = df)
+## 
+## $sunlight
+##                  diff       lwr        upr     p adj
+## Low-High    -2.988229 -4.274217 -1.7022417 0.0000004
+## Medium-High -0.582477 -1.868464  0.7035105 0.5335055
+## Medium-Low   2.405752  1.119765  3.6917396 0.0000508
+## 
+## $water
+##                   diff       lwr        upr     p adj
+## Weekly-Daily -1.709272 -2.585936 -0.8326073 0.0001669
+## 
+## $`sunlight:water`
+##                                  diff        lwr         upr     p adj
+## Low:Daily-High:Daily       -2.2756575 -4.4926790 -0.05863599 0.0405328
+## Medium:Daily-High:Daily    -0.8069924 -3.0240139  1.41002911 0.9005046
+## High:Weekly-High:Daily     -1.3839007 -3.6009222  0.83312082 0.4692036
+## Low:Weekly-High:Daily      -5.0847015 -7.3017230 -2.86767995 0.0000000
+## Medium:Weekly-High:Daily   -1.7418623 -3.9588838  0.47515924 0.2145825
+## Medium:Daily-Low:Daily      1.4686651 -0.7483564  3.68568661 0.4001563
+## High:Weekly-Low:Daily       0.8917568 -1.3252647  3.10877832 0.8554684
+## Low:Weekly-Low:Daily       -2.8090440 -5.0260655 -0.59202244 0.0045847
+## Medium:Weekly-Low:Daily     0.5337952 -1.6832263  2.75081674 0.9824391
+## High:Weekly-Medium:Daily   -0.5769083 -2.7939298  1.64011322 0.9752292
+## Low:Weekly-Medium:Daily    -4.2777091 -6.4947306 -2.06068754 0.0000015
+## Medium:Weekly-Medium:Daily -0.9348699 -3.1518914  1.28215164 0.8289908
+## Low:Weekly-High:Weekly     -3.7008008 -5.9178223 -1.48377925 0.0000474
+## Medium:Weekly-High:Weekly  -0.3579616 -2.5749831  1.85905994 0.9972406
+## Medium:Weekly-Low:Weekly    3.3428392  1.1258177  5.55986070 0.0003364
+```
+
+---
 ## Acknowledgement
 
 Content is based on "Design and Analysis of Experiments" by Douglas C. Montgomery
