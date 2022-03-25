@@ -156,26 +156,37 @@ In-class
 
 &gt; In class
 
+`$$y_{ijk} = \mu + \tau_i + \beta_j + (\tau \beta)_{ij} + \epsilon_{ijk}$$`
+Introduce all terms and write down the assumptions of the error term
 ---
 
 ## The mean model
 
 &gt; In class
 
+`$$y_{ijk} = \mu_{ij} + \epsilon_{ijk}$$`
+Introduce all terms and write down the assumptions of the error term
+
 ---
 ## Testing hypotheses
 
 1. equality of row treatment effect
 
-&gt; in-class
+H0: `\(\tau_1=\tau_2=...=\tau_a=0\)`
+
+H1: at least one `\(\tau_i \neq 0\)`
 
 2. equality of column treatment effect
 
-&gt; in-class
+H0: `\(\beta_1=\beta_2=...=\beta_b=0\)`
+
+H1: at least one `\(\beta_i \neq 0\)`
 
 3. equality of row and column treatments interact
 
-&gt; in-class
+H0: `\((\tau\beta)_{ij}=0\)` for all `\(i, j\)`
+
+H1: at least one `\((\tau\beta)_{ij} \neq 0\)`
 
 ---
 
@@ -185,7 +196,7 @@ In-class
 
 ### Total
 
-`$$y_{...}$$`
+`$$y_{...} = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n y_{ijk}$$`
 
 ]
 
@@ -194,7 +205,7 @@ In-class
 
 ### Mean
 
-`$$\bar{y}_{...}$$`
+`$$\bar{y}_{...} = \frac{y_{...}}{abn}$$`
 
 ]
 
@@ -205,7 +216,7 @@ In-class
 .pull-left[
 ### Total of observations under the `\(i\)`th level of factor A
 
-`$$y_{i..}$$`
+`$$y_{i..}=\sum_{j=1}^b\sum_{k=1}^n y_{ijk}$$`
 
 
 ]
@@ -223,7 +234,7 @@ In-class
 .pull-left[
 ### Total of observations under the `\(j\)`th level of factor B
 
-`$$y_{.j.}$$`
+`$$y_{.j.}= \sum_{i=1}^a\sum_{k=1}^n y_{ijk}$$`
 
 
 ]
@@ -242,7 +253,7 @@ In-class
 
 ### Total of all observations in the `\(ij\)`th cell
 
-`$$y_{ij.}$$`
+`$$y_{ij.}= \sum_{k=1}^n y_{ijk}$$`
 
 ]
 
@@ -251,7 +262,7 @@ In-class
 
 ### Mean
 
-`$$\bar{y}_{ij.}$$`
+`$$\bar{y}_{ij.} = \frac{y_{ij.}}{n}$$`
 
 ]
 
@@ -268,7 +279,15 @@ Show that
 
 ## Degrees of freedom associated with sum of squares
 
-&gt; In class
+&gt; A : a-1
+
+&gt; B: b-1
+
+&gt; AB interaction: (a-1)(b-1)
+
+&gt; Error: ab(n-1)
+
+&gt; Total: abn-1
 
 
 ---
