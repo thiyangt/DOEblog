@@ -1,8 +1,8 @@
 ---
 title: "STA 225 2.0 Design and Analysis of Experiments"
-subtitle: "Lecture 11"
+subtitle: "Lecture 11-12"
 author: "Dr Thiyanga S. Talagala"
-date: "2022-03-08"
+date: "2022-03-08/ 2022-03-25"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -304,3 +304,251 @@ data %>% group_by(material) %>%
   summarize(mean = mean(life), sd=sd(life))
 ```
 
+
+---
+## ANOVA
+
+```{r}
+head(data)
+fit <- lm(life ~ temperature + material + temperature * material, data=data)
+```
+
+---
+
+## ANOVA
+
+```{r}
+anova(fit)
+```
+
+---
+## Manual computation
+
+Total sum of squares
+
+$$SS_T = \sum_{i=1}^{a}\sum_{j=1}^b\sum_{k=1}^ny^2_{ijk} - \frac{y^2_{...}}{abn}$$
+
+Sum of squares for the main effects
+
+
+$$SS_A = \frac{1}{bn}\sum_{i=1}^{a}y^2_{i..} - \frac{y^2_{...}}{abn}$$
+
+$$SS_B = \frac{1}{an}\sum_{i=1}^{b}y^2_{.j.} - \frac{y^2_{...}}{abn}$$
+
+---
+
+Sum of squares between the *ab* cell totals
+
+$$SS_{Subtotals} = \frac{1}{n}\sum_{i=1}^{a}\sum_{j=1}^by^2_{ij.} - \frac{y^2_{...}}{abn}$$
+
+$$SS_{AB} = SS_{Subtotals} - SS_A - SS_B$$
+
+$$SS_E = SS_T - SS_{Subtotals}$$
+
+---
+
+## Model Adequacy Checking
+
+```{r}
+resid_fit <- broom::augment(fit)
+resid_fit
+```
+
+---
+
+## Assumption
+
+We assume that the error terms $\epsilon_{ijk}$ are normally and independently distributed with constant variance $\sigma^2$.
+
+---
+
+## Normality plot of residuals
+
+.pull-left[
+```{r, fig.height=4, fig.width=4}
+ggplot(resid_fit, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+
+```
+
+]
+
+.pull-right[
+
+```{r}
+shapiro.test(resid_fit$.resid)
+```
+
+]
+
+---
+
+## Residuals vs Fitted Values
+
+```{r, fig.height=4}
+ggplot(resid_fit, aes(x=.fitted, y=.resid)) + geom_point()
+
+```
+
+---
+
+## Plot of residuals vs material type
+
+```{r, fig.height=4}
+ggplot(resid_fit, aes(x=material, y=.resid)) + geom_point()
+
+```
+
+---
+
+## Plot of residuals vs temperature
+
+```{r, fig.height=4}
+ggplot(resid_fit, aes(x=temperature, y=.resid)) + geom_point()
+
+```
+
+---
+
+## ANOVA table interpretation
+
+```{r}
+anovatab <- anova(fit)
+anovatab
+```
+
+---
+
+### Graph of average responses at each treatment combination
+
+```{r, message=FALSE, warning=FALSE}
+average_responses <- data %>% group_by(temperature, material) %>% summarize(mean=mean(life))
+average_responses 
+
+```
+
+---
+
+### Graph of average responses at each treatment combination
+
+```{r, message=FALSE, warning=FALSE, fig.height=5}
+
+ggplot(average_responses, aes(x=temperature, y=mean, group=material, col=material)) + geom_point() + geom_path() 
+
+```
+
+---
+
+## Interpretation
+
+> If there is a significant interaction between factor A and factor B
+
+- Omit the tests for main effects when interaction is present.
+
+- Reason: The interaction indicates that the relationship between the levels of factor A vary with the levels of factor B
+
+---
+
+## Interpretation
+
+> If there is no significant interaction
+
+- Then the tests for main effects easily interpreted
+
+- For example we can conclude that there are significant differences between at least two levels of factor A. Further, these differences should be similar at each level of factor B. Then you can use multiple comparisons to determine which levels of factor A are significantly different.
+
+---
+
+## Multiple comparisons: when interaction effect is present
+
+- Perform the multiple comparisons on the "ab" treatments (cell means). 
+
+- Alternatively, a user might want to compare the levels of factor A for a specified levels of factor B
+
+
+---
+
+## Multiple comparisons
+
+```{r, comment=NA, warning=FALSE}
+aov.out <- aov(life ~ material * temperature, data=data)
+aov.out
+
+```
+
+---
+```{r}
+results <- TukeyHSD(aov.out)
+results
+```
+
+
+---
+
+```{r}
+dim(results$`material:temperature`)
+```
+---
+
+```{r}
+
+results$`material:temperature`[1:18, ]
+```
+
+---
+
+```{r}
+
+results$`material:temperature`[19:30, ]
+```
+
+The analysis indicates that **at the temperature level 70** there is no significant difference between the mean battery life for material type 2 and type 3. However, there is a significant difference between mean battery life for material types between 2 and 1. Furthermore, there is a significant difference between mean battery life for material types 3 and 1. Mean battery life for material type 1 is significantly lower in comparison to both material type 2 and 3
+
+
+---
+
+## Manual calculations
+
+Studentized range statistic
+
+$$q = \frac{\bar{y}_{max}-\bar{y}_{min}}{\sqrt{MS_E/n}}$$
+
+$$T_\alpha = q_\alpha(a, f) \sqrt{\frac{MS_E}{n}}$$
+$a$ - treatments
+
+$f$ - number of degrees of freedom associated with $MS_E$
+
+---
+Three material (a=3) type at temperature 70
+
+$$T_{0.05} = q_{0.05}(3, 27) \sqrt{\frac{675.21}{4}} = 45.47$$
+
+
+.pull-left[
+$$\bar{y}_{12.} = 57.25$$
+$$\bar{y}_{22.} = 119.75$$
+
+$$\bar{y}_{32.} = 145.75$$
+
+]
+
+.pull-right[
+
+**3 vs 1**: $145.75 - 57.25 = 88.50 > T_{0.05}$
+
+
+**3 vs 2**: $145.75 - 119.75 = 26.00 < T_{0.05}$
+
+**2 vs 1**: $119.75 - 57.25 = 62.50 > T_{0.05}$
+
+
+]
+
+
+
+---
+
+## Acknowledgement
+
+Content is based on "Design and Analysis of Experiments" by Douglas C. Montgomery

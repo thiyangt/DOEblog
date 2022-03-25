@@ -4,7 +4,6 @@
     <title>STA 225 2.0 Design and Analysis of Experiments</title>
     <meta charset="utf-8" />
     <meta name="author" content="Dr Thiyanga S. Talagala" />
-    <meta name="date" content="2022-03-08" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
@@ -20,9 +19,9 @@
 class: center, middle, inverse, title-slide
 
 # STA 225 2.0 Design and Analysis of Experiments
-## Lecture 11
+## Lecture 11-12
 ### Dr Thiyanga S. Talagala
-### 2022-03-08
+### 2022-03-08/ 2022-03-25
 
 ---
 
@@ -334,6 +333,465 @@ data %&gt;% group_by(material) %&gt;%
 ## 3 3        125.   35.8
 ```
 
+
+---
+## ANOVA
+
+
+```r
+head(data)
+```
+
+```
+## # A tibble: 6 × 3
+##   material temperature  life
+##   &lt;fct&gt;    &lt;fct&gt;       &lt;dbl&gt;
+## 1 1        15            130
+## 2 1        15            155
+## 3 1        15             74
+## 4 1        15            180
+## 5 1        70             34
+## 6 1        70             40
+```
+
+```r
+fit &lt;- lm(life ~ temperature + material + temperature * material, data=data)
+```
+
+---
+
+## ANOVA
+
+
+```r
+anova(fit)
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: life
+##                      Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## temperature           2  39119 19559.4 28.9677 1.909e-07 ***
+## material              2  10684  5341.9  7.9114  0.001976 ** 
+## temperature:material  4   9614  2403.4  3.5595  0.018611 *  
+## Residuals            27  18231   675.2                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+## Manual computation
+
+Total sum of squares
+
+`$$SS_T = \sum_{i=1}^{a}\sum_{j=1}^b\sum_{k=1}^ny^2_{ijk} - \frac{y^2_{...}}{abn}$$`
+
+Sum of squares for the main effects
+
+
+`$$SS_A = \frac{1}{bn}\sum_{i=1}^{a}y^2_{i..} - \frac{y^2_{...}}{abn}$$`
+
+`$$SS_B = \frac{1}{an}\sum_{i=1}^{b}y^2_{.j.} - \frac{y^2_{...}}{abn}$$`
+
+---
+
+Sum of squares between the *ab* cell totals
+
+`$$SS_{Subtotals} = \frac{1}{n}\sum_{i=1}^{a}\sum_{j=1}^by^2_{ij.} - \frac{y^2_{...}}{abn}$$`
+
+`$$SS_{AB} = SS_{Subtotals} - SS_A - SS_B$$`
+
+`$$SS_E = SS_T - SS_{Subtotals}$$`
+
+---
+
+## Model Adequacy Checking
+
+
+```r
+resid_fit &lt;- broom::augment(fit)
+resid_fit
+```
+
+```
+## # A tibble: 36 × 9
+##     life temperature material .fitted .resid  .hat .sigma .cooksd .std.resid
+##    &lt;dbl&gt; &lt;fct&gt;       &lt;fct&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
+##  1   130 15          1          135.   -4.75 0.250   26.5 0.00165     -0.211
+##  2   155 15          1          135.   20.3  0.250   26.1 0.0300       0.900
+##  3    74 15          1          135.  -60.7  0.250   22.6 0.270       -2.70 
+##  4   180 15          1          135.   45.3  0.250   24.4 0.150        2.01 
+##  5    34 70          1           57.2 -23.2  0.25    26.0 0.0395      -1.03 
+##  6    40 70          1           57.2 -17.2  0.25    26.2 0.0218      -0.767
+##  7    80 70          1           57.2  22.8  0.25    26.0 0.0379       1.01 
+##  8    75 70          1           57.2  17.8  0.25    26.2 0.0230       0.789
+##  9    20 125         1           57.5 -37.5  0.25    25.1 0.103       -1.67 
+## 10    70 125         1           57.5  12.5  0.25    26.3 0.0114       0.555
+## # … with 26 more rows
+```
+
+---
+
+## Assumption
+
+We assume that the error terms `\(\epsilon_{ijk}\)` are normally and independently distributed with constant variance `\(\sigma^2\)`.
+
+---
+
+## Normality plot of residuals
+
+.pull-left[
+
+```r
+ggplot(resid_fit, 
+       aes(sample=.resid))+
+  stat_qq() + stat_qq_line()+labs(x="Theoretical Quantiles", y="Sample Quantiles")
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+
+
+```r
+shapiro.test(resid_fit$.resid)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  resid_fit$.resid
+## W = 0.97606, p-value = 0.6117
+```
+
+]
+
+---
+
+## Residuals vs Fitted Values
+
+
+```r
+ggplot(resid_fit, aes(x=.fitted, y=.resid)) + geom_point()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## Plot of residuals vs material type
+
+
+```r
+ggplot(resid_fit, aes(x=material, y=.resid)) + geom_point()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+---
+
+## Plot of residuals vs temperature
+
+
+```r
+ggplot(resid_fit, aes(x=temperature, y=.resid)) + geom_point()
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+---
+
+## ANOVA table interpretation
+
+
+```r
+anovatab &lt;- anova(fit)
+anovatab
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: life
+##                      Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## temperature           2  39119 19559.4 28.9677 1.909e-07 ***
+## material              2  10684  5341.9  7.9114  0.001976 ** 
+## temperature:material  4   9614  2403.4  3.5595  0.018611 *  
+## Residuals            27  18231   675.2                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
+### Graph of average responses at each treatment combination
+
+
+```r
+average_responses &lt;- data %&gt;% group_by(temperature, material) %&gt;% summarize(mean=mean(life))
+average_responses 
+```
+
+```
+## # A tibble: 9 × 3
+## # Groups:   temperature [3]
+##   temperature material  mean
+##   &lt;fct&gt;       &lt;fct&gt;    &lt;dbl&gt;
+## 1 15          1        135. 
+## 2 15          2        156. 
+## 3 15          3        144  
+## 4 70          1         57.2
+## 5 70          2        120. 
+## 6 70          3        146. 
+## 7 125         1         57.5
+## 8 125         2         49.5
+## 9 125         3         85.5
+```
+
+---
+
+### Graph of average responses at each treatment combination
+
+
+```r
+ggplot(average_responses, aes(x=temperature, y=mean, group=material, col=material)) + geom_point() + geom_path() 
+```
+
+![](L8_DOE_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+
+## Interpretation
+
+&gt; If there is a significant interaction between factor A and factor B
+
+- Omit the tests for main effects when interaction is present.
+
+- Reason: The interaction indicates that the relationship between the levels of factor A vary with the levels of factor B
+
+---
+
+## Interpretation
+
+&gt; If there is no significant interaction
+
+- Then the tests for main effects easily interpreted
+
+- For example we can conclude that there are significant differences between at least two levels of factor A. Further, these differences should be similar at each level of factor B. Then you can use multiple comparisons to determine which levels of factor A are significantly different.
+
+---
+
+## Multiple comparisons: when interaction effect is present
+
+- Perform the multiple comparisons on the "ab" treatments (cell means). 
+
+- Alternatively, a user might want to compare the levels of factor A for a specified levels of factor B
+
+
+---
+
+## Multiple comparisons
+
+
+```r
+aov.out &lt;- aov(life ~ material * temperature, data=data)
+aov.out
+```
+
+```
+Call:
+   aov(formula = life ~ material * temperature, data = data)
+
+Terms:
+                material temperature material:temperature Residuals
+Sum of Squares  10683.72    39118.72              9613.78  18230.75
+Deg. of Freedom        2           2                    4        27
+
+Residual standard error: 25.98486
+Estimated effects may be unbalanced
+```
+
+---
+
+```r
+results &lt;- TukeyHSD(aov.out)
+results
+```
+
+```
+##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = life ~ material * temperature, data = data)
+## 
+## $material
+##         diff       lwr      upr     p adj
+## 2-1 25.16667 -1.135677 51.46901 0.0627571
+## 3-1 41.91667 15.614323 68.21901 0.0014162
+## 3-2 16.75000 -9.552344 43.05234 0.2717815
+## 
+## $temperature
+##             diff        lwr       upr     p adj
+## 70-15  -37.25000  -63.55234 -10.94766 0.0043788
+## 125-15 -80.66667 -106.96901 -54.36432 0.0000001
+## 125-70 -43.41667  -69.71901 -17.11432 0.0009787
+## 
+## $`material:temperature`
+##                diff         lwr        upr     p adj
+## 2:15-1:15     21.00  -40.823184  82.823184 0.9616404
+## 3:15-1:15      9.25  -52.573184  71.073184 0.9998527
+## 1:70-1:15    -77.50 -139.323184 -15.676816 0.0065212
+## 2:70-1:15    -15.00  -76.823184  46.823184 0.9953182
+## 3:70-1:15     11.00  -50.823184  72.823184 0.9994703
+## 1:125-1:15   -77.25 -139.073184 -15.426816 0.0067471
+## 2:125-1:15   -85.25 -147.073184 -23.426816 0.0022351
+## 3:125-1:15   -49.25 -111.073184  12.573184 0.2016535
+## 3:15-2:15    -11.75  -73.573184  50.073184 0.9991463
+## 1:70-2:15    -98.50 -160.323184 -36.676816 0.0003449
+## 2:70-2:15    -36.00  -97.823184  25.823184 0.5819453
+## 3:70-2:15    -10.00  -71.823184  51.823184 0.9997369
+## 1:125-2:15   -98.25 -160.073184 -36.426816 0.0003574
+## 2:125-2:15  -106.25 -168.073184 -44.426816 0.0001152
+## 3:125-2:15   -70.25 -132.073184  -8.426816 0.0172076
+## 1:70-3:15    -86.75 -148.573184 -24.926816 0.0018119
+## 2:70-3:15    -24.25  -86.073184  37.573184 0.9165175
+## 3:70-3:15      1.75  -60.073184  63.573184 1.0000000
+## 1:125-3:15   -86.50 -148.323184 -24.676816 0.0018765
+## 2:125-3:15   -94.50 -156.323184 -32.676816 0.0006078
+## 3:125-3:15   -58.50 -120.323184   3.323184 0.0742711
+## 2:70-1:70     62.50    0.676816 124.323184 0.0460388
+## 3:70-1:70     88.50   26.676816 150.323184 0.0014173
+## 1:125-1:70     0.25  -61.573184  62.073184 1.0000000
+## 2:125-1:70    -7.75  -69.573184  54.073184 0.9999614
+## 3:125-1:70    28.25  -33.573184  90.073184 0.8281938
+## 3:70-2:70     26.00  -35.823184  87.823184 0.8822881
+## 1:125-2:70   -62.25 -124.073184  -0.426816 0.0474675
+## 2:125-2:70   -70.25 -132.073184  -8.426816 0.0172076
+## 3:125-2:70   -34.25  -96.073184  27.573184 0.6420441
+## 1:125-3:70   -88.25 -150.073184 -26.426816 0.0014679
+## 2:125-3:70   -96.25 -158.073184 -34.426816 0.0004744
+## 3:125-3:70   -60.25 -122.073184   1.573184 0.0604247
+## 2:125-1:125   -8.00  -69.823184  53.823184 0.9999508
+## 3:125-1:125   28.00  -33.823184  89.823184 0.8347331
+## 3:125-2:125   36.00  -25.823184  97.823184 0.5819453
+```
+
+
+---
+
+
+```r
+dim(results$`material:temperature`)
+```
+
+```
+## [1] 36  4
+```
+---
+
+
+```r
+results$`material:temperature`[1:18, ]
+```
+
+```
+##               diff        lwr        upr        p adj
+## 2:15-1:15    21.00  -40.82318  82.823184 0.9616403972
+## 3:15-1:15     9.25  -52.57318  71.073184 0.9998527390
+## 1:70-1:15   -77.50 -139.32318 -15.676816 0.0065212148
+## 2:70-1:15   -15.00  -76.82318  46.823184 0.9953181940
+## 3:70-1:15    11.00  -50.82318  72.823184 0.9994702697
+## 1:125-1:15  -77.25 -139.07318 -15.426816 0.0067471137
+## 2:125-1:15  -85.25 -147.07318 -23.426816 0.0022350689
+## 3:125-1:15  -49.25 -111.07318  12.573184 0.2016535112
+## 3:15-2:15   -11.75  -73.57318  50.073184 0.9991463221
+## 1:70-2:15   -98.50 -160.32318 -36.676816 0.0003449173
+## 2:70-2:15   -36.00  -97.82318  25.823184 0.5819453144
+## 3:70-2:15   -10.00  -71.82318  51.823184 0.9997369049
+## 1:125-2:15  -98.25 -160.07318 -36.426816 0.0003573540
+## 2:125-2:15 -106.25 -168.07318 -44.426816 0.0001151507
+## 3:125-2:15  -70.25 -132.07318  -8.426816 0.0172076171
+## 1:70-3:15   -86.75 -148.57318 -24.926816 0.0018118976
+## 2:70-3:15   -24.25  -86.07318  37.573184 0.9165174549
+## 3:70-3:15     1.75  -60.07318  63.573184 0.9999999997
+```
+
+---
+
+
+```r
+results$`material:temperature`[19:30, ]
+```
+
+```
+##              diff         lwr        upr        p adj
+## 1:125-3:15 -86.50 -148.323184 -24.676816 0.0018764896
+## 2:125-3:15 -94.50 -156.323184 -32.676816 0.0006077696
+## 3:125-3:15 -58.50 -120.323184   3.323184 0.0742710994
+## 2:70-1:70   62.50    0.676816 124.323184 0.0460387808
+## 3:70-1:70   88.50   26.676816 150.323184 0.0014172574
+## 1:125-1:70   0.25  -61.573184  62.073184 1.0000000000
+## 2:125-1:70  -7.75  -69.573184  54.073184 0.9999613693
+## 3:125-1:70  28.25  -33.573184  90.073184 0.8281938115
+## 3:70-2:70   26.00  -35.823184  87.823184 0.8822881387
+## 1:125-2:70 -62.25 -124.073184  -0.426816 0.0474674659
+## 2:125-2:70 -70.25 -132.073184  -8.426816 0.0172076171
+## 3:125-2:70 -34.25  -96.073184  27.573184 0.6420440941
+```
+
+The analysis indicates that **at the temperature level 70** there is no significant difference between the mean battery life for material type 2 and type 3. However, there is a significant difference between mean battery life for material types between 2 and 1. Furthermore, there is a significant difference between mean battery life for material types 3 and 1. Mean battery life for material type 1 is significantly lower in comparison to both material type 2 and 3
+
+
+---
+
+## Manual calculations
+
+Studentized range statistic
+
+`$$q = \frac{\bar{y}_{max}-\bar{y}_{min}}{\sqrt{MS_E/n}}$$`
+
+`$$T_\alpha = q_\alpha(a, f) \sqrt{\frac{MS_E}{n}}$$`
+`\(a\)` - treatments
+
+`\(f\)` - number of degrees of freedom associated with `\(MS_E\)`
+
+---
+Three material (a=3) type at temperature 70
+
+`$$T_{0.05} = q_{0.05}(3, 27) \sqrt{\frac{675.21}{4}} = 45.47$$`
+
+
+.pull-left[
+`$$\bar{y}_{12.} = 57.25$$`
+`$$\bar{y}_{22.} = 119.75$$`
+
+`$$\bar{y}_{32.} = 145.75$$`
+
+]
+
+.pull-right[
+
+**3 vs 1**: `\(145.75 - 57.25 = 88.50 &gt; T_{0.05}\)`
+
+
+**3 vs 2**: `\(145.75 - 119.75 = 26.00 &lt; T_{0.05}\)`
+
+**2 vs 1**: `\(119.75 - 57.25 = 62.50 &gt; T_{0.05}\)`
+
+
+]
+
+
+
+---
+
+## Acknowledgement
+
+Content is based on "Design and Analysis of Experiments" by Douglas C. Montgomery
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
