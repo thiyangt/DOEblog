@@ -6,7 +6,7 @@ category:
 description: Introduction and Terminilogy in Experimental Designs
 draft: false
 image: images/portfolio/work1.jpg
-title: Week 1
+title: A) Week 1
 ---
 
 # Introduction to Design and Analysis of Experiments

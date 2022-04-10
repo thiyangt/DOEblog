@@ -4,7 +4,7 @@ category: DOE
 description: Completely Randomized Experimental Design
 draft: false
 image: images/portfolio/work3.jpg
-title: Week 3
+title: C) Week 3
 ---
 
 ## Completely Randomized Experimental Design
