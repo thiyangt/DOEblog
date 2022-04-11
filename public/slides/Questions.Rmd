@@ -61,6 +61,9 @@ df <- data.frame(Source, DF, SS, MS, F, P)
 knitr::kable(df)
 ```
 
+ 
+
+
 **Part 2**
 
 State the differences between the two approaches these students had applied.
@@ -145,7 +148,7 @@ What is the main advantage of a randomized complete block design over a complete
 
 # Question 2: Answer (Help)
 
-Refer teaching materials
+Refer to teaching materials
 
 
 # Question 3
@@ -154,7 +157,7 @@ What are the advantages of factorial design?
 
 # Question 3: Answer (Help)
 
-Refer teaching materials
+Refer to teaching materials
 
 # Question 4
 
@@ -164,7 +167,7 @@ What is a factorial design?
 
 In a factorial design, multiple independent variables are tested.
 
-Refer teaching materials for more
+Refer to teaching materials for more information.
 
 # Question 5
 
