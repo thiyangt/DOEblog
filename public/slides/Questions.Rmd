@@ -1,0 +1,259 @@
+---
+output: rmdformats::material
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Questions
+
+> **Note: To help you check your responses, I've supplied some rough answers. You should write the whole answers on the exam.**
+
+
+## Question 1
+
+An advertising firm is interested in studying the effect of four types of sales advertisements (A, B, C and D) on the sales amount of a certain product in a city. The stores in the city can be divided into three groups as small scale, middle scale and large scale accordingly to the size of their sales amount. Under each group, a random ordering of four types of sales advertisements was exhibited in the selected four stores of same size. Sales amounts for a week are shown in the table below.
+
+```{r, comment=NA, message=FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+advertisement_type <- as.factor(rep(c("A", "B", "C", "D"), each=3))
+store <- as.factor(rep(c("Small", "Middle", "Large"), 4))
+sales <- c(24, 40, 41, 28, 48, 52, 20, 32, 35, 26, 50, 55)
+df1 <- data.frame(advertisement_type = advertisement_type, 
+                  store=store, sales = sales)
+df1
+```
+
+
+**Part 1**
+
+These data were given to two students separately and asked to construct the ANOVA table to analyze. The results obtained by them are shown below. Some values were missing in each ANOVA table and marked with a blank space "...". 
+
+Complete each ANOVA table by completing the missing values.
+
+*Results of the first student*
+
+```{r, echo=FALSE}
+Source <- c("Advertisement type", "Error", "Total")
+DF <- c("...", "...", "...")
+SS <- c("...", 1119.33, 1548.91)
+MS <- c("...", "...", "")
+F <- c("...", "", "")
+P <- c(0.432, "", "")
+df <- data.frame(Source, DF, SS, MS, F, P)
+knitr::kable(df)
+```
+
+
+*Results of the second student*
+
+
+```{r, echo=FALSE}
+Source <- c("Advertisement type","Store type", "Error", "Total")
+DF <- c("...", "...", "...", "...")
+SS <- c("...", 1048.17, 71.17, 1549.92)
+MS <- c("...", "...", "...", "")
+F <- c("...", "...", "", "")
+P <- c(0.006, "0.000"
+       , "", "")
+df <- data.frame(Source, DF, SS, MS, F, P)
+knitr::kable(df)
+```
+
+**Part 2**
+
+State the differences between the two approaches these students had applied.
+
+**Part 3**
+
+One student has obtained the following graph. Comment on it.
+
+
+
+```{r, comment=NA, message=FALSE, warning=FALSE, echo=FALSE}
+library(patchwork)
+library(ggrepel)
+g1 <- df1 %>% group_by(store) %>% summarise(mean = mean(sales))
+g2 <- df1 %>% group_by(advertisement_type) %>% summarise(mean = mean(sales))
+
+pq1 <- ggplot(g1, aes(x=store, y=mean, group=1,label=round(mean, 1))) + geom_point() + geom_line() + geom_text_repel()
+pq2 <- ggplot(g2, aes(x=advertisement_type, y=mean,  group=1, label=round(mean, 1))) + geom_point() + geom_path() + geom_text_repel()
+(pq1|pq2)
+```
+
+**Part 4**
+
+If you are to perform the same analysis, which approach would you apply? Justify your answer.
+
+**Part 5**
+
+Write the effect model for the selected approach and define all the terms of it.
+
+**Part 6**
+
+Write the hypotheses of the selected model and state your decisions at 5% level of significance. Interpret your results. (No need to do multiple comparisons.)
+
+# Q1-1: Answer (Help)
+
+**First student**
+
+```{r, echo=FALSE, comment=NA}
+q1 <- lm(sales ~ advertisement_type, data=df1)
+anova(q1)
+```
+
+
+**Second student**
+
+```{r, echo=FALSE, comment=NA}
+q2 <- lm(sales ~ advertisement_type + store, data=df1)
+anova(q2)
+```
+
+
+
+# Q1-2: Answer (Help)
+
+First student used CRD.
+
+Second student used RCBD.
+
+# Q1-3: Answer (Help)
+
+Your turn, interpret!
+
+# Q1-4: Answer (Help)
+
+RCBD
+
+Reason: Your turn, explain!
+
+# Q1-5: Answer (Help)
+
+See lecture materials at https://smart-doe.netlify.app/slides/l6_doe#20
+
+# Q1-6: Answer (Help)
+
+See lecture materials at https://smart-doe.netlify.app/slides/l6_doe#25
+
+Use effect model format.
+
+# Question 2
+
+What is the main advantage of a randomized complete block design over a completely randomized design?
+
+# Question 2: Answer (Help)
+
+Refer teaching materials
+
+
+# Question 3
+
+What are the advantages of factorial design?
+
+# Question 3: Answer (Help)
+
+Refer teaching materials
+
+# Question 4
+
+What is a factorial design?
+
+# Question 4: Answer (Help)
+
+In a factorial design, multiple independent variables are tested.
+
+Refer teaching materials for more
+
+# Question 5
+
+An experiment is conducted to study the influence of material type and thickness in the strength of screen protectors. The following data are collected.
+
+```{r, comment=NA, echo=FALSE}
+temperature <- as.factor(rep(c(100, 125, 150), each =9))
+material <- as.factor(rep(c(1, 1, 1, 2,2,2,3,3,3), 3))
+strength <- c(581, 567, 572, 555, 530, 580, 556, 585, 600,
+              1090, 1087, 1085, 1069, 1034, 999, 1046, 1054, 1070, 1392, 1380, 1388, 1330, 1315, 1300, 887, 905, 890)
+df <- data.frame(temperature=temperature, material = material, strength = strength)
+df
+```
+
+The following summary statistics are obtained
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, comment=NA}
+library(tidyverse)
+df %>% group_by(temperature) %>%
+  summarize(mean=mean(strength))
+df %>% group_by(material) %>%
+  summarize(mean=mean(strength))
+ df %>% group_by(material, temperature) %>% summarize(mean=mean(strength))
+df %>% 
+  summarize(mean=mean(strength))
+```
+
+
+**Part 1**
+
+Use $\alpha=0.05$ in the analysis. Is there a significant interaction effect? Does material type or thickness affect the response? What conclusions can you draw?
+
+**Part 2**
+
+Draw graph of mean responses at each treatment combination
+ and comment on it.
+ 
+
+ 
+
+# Question 5 - Part 1 Answer (Help)
+
+Based on the given information you should be able to construct ANOVA table. 
+
+Furthermore, you should be able to compute $y_{..}$, $y_{.jk}$, etc.
+
+Using the following information you can complete the ANOVA table.
+
+```{r, echo=FALSE}
+fit <- lm(strength ~ temperature + material + temperature*material, data=df)
+af <- anova(fit)
+knitr::kable(af)
+```
+
+# Question 5 - Part 2 Answer (Help)
+
+```{r, comment=NA, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggrepel)
+meandf <- df %>% group_by(material, temperature) %>% summarize(mean=mean(strength))
+ggplot(meandf, aes(x=temperature, y=mean, group=material, col=material, label=round(mean, 1))) + geom_point() + geom_path() + geom_text_repel()
+```
+
+# Question 6
+
+**MCQ**
+
+Why would you use the Tukey multiple comparison?
+
+(a) To test for normality
+
+(b) To test for homogeneity of variance
+
+(c) To test for differences in pairwise means
+
+(d) To test independence of errors
+
+# Question 6: Answer 
+
+(c) To test for differences in pairwise means
+
+# Question 7
+
+The following Tukey multiple comparisons results are obtained for data in Question 5. Which combination(s) of treatments would you recommend? State all.
+
+```{r, echo=FALSE, comment=NA}
+aov2.out <- aov(strength ~ material * temperature, data=df)
+TukeyHSD(aov2.out)
+```
+
+# Question 7: Answer (Help)
+
+Hint: If interaction is significant, you should compare all `material::temperature` cell means to determine which ones differ significantly.
