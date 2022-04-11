@@ -7,4 +7,4 @@ image: images/portfolio/work5.jpg
 title: I) Practice Questions
 ---
 
-Click here: [slides](/slides/Questions.html)
+Click here: [Questions](/slides/Questions.html)
